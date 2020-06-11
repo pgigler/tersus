@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[7],{DKj7:function(e,t,a){"use strict";a.r(t);var n=a("q1tI"),l=a.n(n),c=a("9Dj+"),s=a("H8eV");t.default=function(){return l.a.createElement(c.a,null,l.a.createElement(s.a,{title:"Rólunk"}),l.a.createElement("div",{className:"container"},l.a.createElement("h1",{className:"pt-12 text-4xl leading-tight font-semibold"},"Rólunk"),l.a.createElement("p",{className:"text-lg mt-3"},"Lorem ipsum...")))}}}]);
+//# sourceMappingURL=component---src-pages-rolunk-tsx-3c12df8ae95013126ab8.js.map
