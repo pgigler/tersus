@@ -6,6 +6,7 @@ module.exports = {
 		description: `Medence- és egyéb tisztítószerekkel foglalkozó vállalkozás`,
 		author: `Tersus`,
 	},
+	pathPrefix: `/tersus`,
 	plugins: [
 		`gatsby-plugin-react-helmet`,
 		{

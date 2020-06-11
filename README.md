@@ -33,5 +33,5 @@ npm run build
 
 # Where to find website
 
--   UAT: MISSING
+-   UAT: https://pgigler.github.io/tersus/
 -   PROD: https://tersus.hu

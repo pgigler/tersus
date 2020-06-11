@@ -1,6 +1,8 @@
-import { Link } from "gatsby";
+import { Link, useStaticQuery, graphql } from "gatsby";
 import React, { useState } from "react";
 import { AnchorLink } from "gatsby-plugin-anchor-links";
+import { getFixed } from "../util/helper";
+import Img from "gatsby-image";
 
 interface Menu {
 	title: string;
@@ -22,12 +24,31 @@ const Header = () => {
 	}
 	const [menuVisible, setMenuVisible] = useState(false);
 
+	const data = useStaticQuery(graphql`
+		query HeaderQuery {
+			allFile(filter: { relativePath: { in: ["main_logo.png"] } }) {
+				edges {
+					node {
+						relativePath
+						childImageSharp {
+							fixed(width: 64) {
+								...GatsbyImageSharpFixed
+							}
+						}
+					}
+				}
+			}
+		}
+	`);
+
+	const fixedLogo = getFixed(data.allFile.edges, "main_logo.png");
+
 	return (
 		<header className="sticky top-0 z-40 h-16 sm:flex sm:justify-between sm:items-center select-none shadow bg-white">
 			<div className="flex items-center h-full justify-between sm:p-0">
-				<div className="flex items-center">
-					<Link to="/" className="absolute ml-5 items-center">
-						<img src="/main_logo.svg" className="h-8" alt="Logo" />
+				<div>
+					<Link to="/" className="ml-5">
+						<Img fixed={fixedLogo} alt="Logo" />
 					</Link>
 				</div>
 
@@ -68,7 +89,8 @@ const Header = () => {
 						key={item.slug}
 						to={item.slug}
 						className={`menu relative py-4 pl-2 sm:py-0 sm:pl-0 flex items-center ${
-							(item.slug === "/" && path === "/") || (item.slug !== "/" && path.startsWith(item.slug))
+							(item.slug === "/" && (path === "/" || path === "/tersus/")) ||
+							(item.slug !== "/" && path.indexOf(item.slug) > -1)
 								? "active"
 								: ""
 						}`}
