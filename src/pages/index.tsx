@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import React from "react";
+import { Link, useStaticQuery, graphql } from "gatsby";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { getFluid } from "../util/helper";
 import BackgroundImage from "gatsby-background-image";
+import productCategories from "../data/product_categories.json";
+import GetInTouch from "../components/get-in-touch";
 
 const IndexPage = () => {
 	const data = useStaticQuery(graphql`
@@ -38,10 +40,24 @@ const IndexPage = () => {
 					</div>
 				</BackgroundImage>
 			</div>
-			<div className="container">
-				<h1 className="pt-12 text-4xl leading-tight font-semibold">Medencetisztítás</h1>
-				<p className="text-lg mt-3">Felsőfokon</p>
+			<div className="container text-lg">
+				<h2 className="py-12 text-xl leading-tight font-semibold">Terméktípusok</h2>
+				{productCategories.map((category) => (
+					<div>
+						<Link to={category.slug} className="pt-8 text-xl leading-tight link">
+							{category.name}
+						</Link>
+						<div>{category.shortDescription}</div>
+					</div>
+				))}
+				<h2 className="pt-12 text-xl leading-tight font-semibold">Fertőtlenítés</h2>
+				<p className="mt-3">Szöveg</p>
+				<h2 className="pt-12 text-xl leading-tight font-semibold">Algaképződés megakadályozása</h2>
+				<p className="mt-3">Szöveg</p>
+				<h2 className="pt-12 text-xl leading-tight font-semibold">Vízkőtlenítés</h2>
+				<p className="my-3">Szöveg</p>
 			</div>
+			<GetInTouch />
 		</Layout>
 	);
 };

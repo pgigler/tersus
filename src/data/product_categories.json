@@ -1,0 +1,38 @@
+[
+	{
+		"id": "kloros",
+		"name": "Klóros",
+		"slug": "/termekek#kloros",
+		"shortDescription": "Klóros termékek"
+	},
+	{
+		"id": "klormentes",
+		"name": "Klórmentes",
+		"slug": "/termekek#klormentes",
+		"shortDescription": "Klórmentes termékek leírás"
+	},
+	{
+		"id": "ph-szabalyozas",
+		"name": "PH-szabályozás",
+		"slug": "/termekek#ph-szabalyozas",
+		"shortDescription": "PH-szabályozás leírás"
+	},
+	{
+		"id": "pelyhesites",
+		"name": "Pelyhesítés",
+		"slug": "/termekek#pelyhesites",
+		"shortDescription": "Pelyhesítés leírás"
+	},
+	{
+		"id": "algaszabalyozas",
+		"name": "Algaszabályozás",
+		"slug": "/termekek#algaszabalyozas",
+		"shortDescription": "Algaszabályozás leírás"
+	},
+	{
+		"id": "kiegeszitok",
+		"name": "Kiegészítők",
+		"slug": "/termekek#kiegeszitok",
+		"shortDescription": "Kiegészítő termékek leírás"
+	}
+]

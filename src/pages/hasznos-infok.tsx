@@ -2,9 +2,8 @@ import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { getFluid } from "../util/helper";
-import { useStaticQuery, graphql } from "gatsby";
+import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
-import { AnchorLink } from "gatsby-plugin-anchor-links";
 
 const UsefulInfoPage = () => {
 	const data = useStaticQuery(graphql`
@@ -58,9 +57,9 @@ const UsefulInfoPage = () => {
 						<p className="mt-3 font-semibold">Medence víz kezelés klórral</p>
 						<p className="mt-3">
 							A medencevíz fertőtlenítéséhez a klór ( BLUE SUPER TABS T,{" "}
-							<AnchorLink to="/termekek#stabil_klor" className="link">
+							<Link to="/termekek#stabil_klor" className="link">
 								STABIL KLÓR
-							</AnchorLink>
+							</Link>
 							, KLÓR GRANULÁTUM) a leggyakrabban alkalmazott módszer. Kiválóan alkalmas szerves
 							szennyeződések oxidációjára és a legnagyobb hatékonysággal elpusztítja a baktériumokat. A
 							klór felhasználható folyamatos fertőtlenítésre és sokk-kezelésre.
@@ -106,9 +105,9 @@ const UsefulInfoPage = () => {
 							hamarosan zöldes színű átláthatatlan pocsolyává alakul. Ennek megakadályozására vagy ha már
 							bekövetkezett a megszüntetésére használjuk az ún. sokkolás műveletét. Ilyenkor rövid időn
 							belül a sokszorosára növeljük a fertőtlenítőszer szintet (
-							<AnchorLink to="/termekek#alga_sokk_p" className="link">
+							<Link to="/termekek#alga_sokk_p" className="link">
 								ALGA-SOKK P
-							</AnchorLink>
+							</Link>
 							-vel). Ez elpusztítja az algákat és leülepedés után porszívóval el lehet azokat távolítani a
 							medencéből. A vízkezelés mért értékeinek beállításához megfelelő mérőcsíkok állnak
 							rendelkezésre.
@@ -145,9 +144,9 @@ const UsefulInfoPage = () => {
 						<p className="mt-3">
 							A vízbe a sokkoló kezeléshez előírt mennyiségű (általában 10 m3 -hez fél kg), előzőleg
 							vízben feloldott klórgranulátumot adagolunk (
-							<AnchorLink to="/termekek#alga_sokk_p" className="link">
+							<Link to="/termekek#alga_sokk_p" className="link">
 								ALGA-SOKK P
-							</AnchorLink>
+							</Link>
 							). – Megkezdjük a medencevíz forgatását.
 						</p>
 						<p className="mt-3">

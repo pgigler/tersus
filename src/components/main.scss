@@ -22,6 +22,18 @@
 
 .link {
 	@apply text-brand-blue font-semibold;
+
+	&:hover {
+		@apply text-black;
+	}
+}
+
+.link-inverse {
+	@apply text-black font-semibold;
+
+	&:hover {
+		@apply text-white;
+	}
 }
 
 main {

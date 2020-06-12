@@ -1,5 +1,6 @@
 [
 	{
+		"category": "kloros",
 		"id": "stabil_klor",
 		"name": "Stabil Klór",
 		"subtitle": "uszodavíz-fertőtlenítő szer (tabletta)",
@@ -46,6 +47,7 @@
 		]
 	},
 	{
+		"category": "algaszabalyozas",
 		"id": "alga_sokk_p",
 		"name": "Alga-Sokk P",
 		"subtitle": "uszodavíz-fertőtlenítő és sokkoló szer",

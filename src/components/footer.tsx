@@ -66,7 +66,7 @@ const Footer = () => {
 					<h2 className="text-white uppercase font-semibold text-lg mb-1">AQSZTID Bt (2002)</h2>
 					<div className="hover:text-brand-blue">
 						<a
-							href="https://www.google.com/maps/place/Cserszegtomaj,+8372/@46.8018213,17.2429432,17.61z/data=!4m5!3m4!1s0x47691c52e234bf31:0x5b1ff7e39c7a89df!8m2!3d46.8036121!4d17.2327563"
+							href="https://www.google.com/maps/place/Vonyarcvashegy,+H%C3%B3vir%C3%A1g+u.+2,+8314/@46.7674977,17.3109753,17z/data=!3m1!4b1!4m5!3m4!1s0x4769028ff02a40d1:0x771e836106b4d63!8m2!3d46.767494!4d17.313164"
 							className="flex flex-col items-end"
 						>
 							<div itemScope itemType="http://schema.org/address" className="flex items-center">

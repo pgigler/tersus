@@ -1,6 +1,5 @@
 import { Link, useStaticQuery, graphql } from "gatsby";
 import React, { useState } from "react";
-import { AnchorLink } from "gatsby-plugin-anchor-links";
 import { getFixed } from "../util/helper";
 import Img from "gatsby-image";
 
@@ -85,7 +84,7 @@ const Header = () => {
 				} relative sm:flex bg-white sm:bg-transparent sm:h-full sm:pb-0 z-10`}
 			>
 				{MENUS.map((item) => (
-					<AnchorLink
+					<Link
 						key={item.slug}
 						to={item.slug}
 						className={`menu relative py-4 pl-2 sm:py-0 sm:pl-0 flex items-center ${
@@ -97,7 +96,7 @@ const Header = () => {
 					>
 						<h1 className="uppercase font-medium text-brand-grayt sm:mx-2 z-20">{item.title}</h1>
 						<div className="absolute bottom-0 left-0 w-full h-0"></div>
-					</AnchorLink>
+					</Link>
 				))}
 			</nav>
 		</header>
