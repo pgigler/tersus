@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{ToLi:function(e,t,a){"use strict";a.r(t);var n=a("q1tI"),l=a.n(n),c=a("9Dj+"),m=a("H8eV");t.default=function(){return l.a.createElement(c.a,null,l.a.createElement(m.a,{title:"Termékek"}),l.a.createElement("div",{className:"container"},l.a.createElement("h1",{className:"pt-12 text-4xl leading-tight font-semibold"},"Termékek"),l.a.createElement("p",{className:"text-lg mt-3"},"Lorem ipsum...")))}}}]);
-//# sourceMappingURL=component---src-pages-termekek-tsx-1b23b0e45311e2dda507.js.map

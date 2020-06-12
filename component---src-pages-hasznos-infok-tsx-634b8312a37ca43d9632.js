@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{GimE:function(e,t,a){"use strict";a.r(t);var n=a("q1tI"),s=a.n(n),l=a("9Dj+"),i=a("H8eV");t.default=function(){return s.a.createElement(l.a,null,s.a.createElement(i.a,{title:"Hasznos infók"}),s.a.createElement("div",{className:"container"},s.a.createElement("h1",{className:"pt-12 text-4xl leading-tight font-semibold"},"Hasznos infók"),s.a.createElement("p",{className:"text-lg mt-3"},"Lorem ipsum...")))}}}]);
-//# sourceMappingURL=component---src-pages-hasznos-infok-tsx-634b8312a37ca43d9632.js.map
