@@ -31,8 +31,8 @@ const UsefulInfoPage = () => {
 	return (
 		<Layout>
 			<SEO title="Hasznos infók" />
-			<div className="container text-lg">
-				<div className="flex flex-wrap mx-3 md:flex-column mb-8">
+			<div className="container text-lg px-4">
+				<div className="flex flex-wrap md:flex-column mb-8">
 					<div className="w-full xl:w-1/2">
 						<h1 className="pt-8 text-4xl leading-tight font-semibold">A medence vízkezelése</h1>
 						<p className="mt-3">

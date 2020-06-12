@@ -5,10 +5,10 @@ import SEO from "../components/seo";
 const PrivacyPolicyPage = () => (
 	<Layout>
 		<SEO title="Adatvédelmi tájékoztató" />
-		<div className="container p-4 text-brand-grayt">
+		<div className="container text-brand-grayt px-4">
 			<h1 className="text-3xl uppercase mb-8">Adatvédelmi tájékoztató</h1>
 			<p>
-                Aqsztid Bt understands that the customer’s privacy is important. In respect of the privacy of the Firm’s
+				Aqsztid Bt understands that the customer’s privacy is important. In respect of the privacy of the Firm’s
 				contacts, personal data will be collected and used only in ways described in this document.
 			</p>
 			<h2 className="text-xl font-semibold py-4">Purpose</h2>
@@ -24,8 +24,7 @@ const PrivacyPolicyPage = () => (
 			</p>
 			<h2 className="text-xl font-semibold py-4">Information About Us</h2>
 			<p>
-                Aqsztid Bt is a limited company registered address at 8314 Vonyarcvashegy, Hóvirág u. 2,
-				e-mail:{" "}
+				Aqsztid Bt is a limited company registered address at 8314 Vonyarcvashegy, Hóvirág u. 2, e-mail:{" "}
 				<a className="text-brand-blue" href="mailto:info@tersus.hu">
 					info@tersus.hu
 				</a>
@@ -36,7 +35,9 @@ const PrivacyPolicyPage = () => (
 				.
 			</p>
 			<h2 className="text-xl font-semibold py-4">Your rights</h2>
-			<p className="mb-2">Anyone providing personal information to Aqsztid Bt has the rights according to GDPR:</p>
+			<p className="mb-2">
+				Anyone providing personal information to Aqsztid Bt has the rights according to GDPR:
+			</p>
 			<ul className="list-disc ml-8">
 				<li>
 					Right of access: You have the right to obtain confirmation as to whether or not your personal data
@@ -72,8 +73,8 @@ const PrivacyPolicyPage = () => (
 				particular by reference to an identifier’.
 			</p>
 			<p>
-				When contacting Aqsztid Bt via e-mail or other communication platform, the following personal information
-				may be requested:
+				When contacting Aqsztid Bt via e-mail or other communication platform, the following personal
+				information may be requested:
 			</p>
 			<ul className="list-disc ml-8">
 				<li>Name</li>

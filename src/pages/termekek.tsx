@@ -27,7 +27,7 @@ const ProductsPage = () => {
 	return (
 		<Layout>
 			<SEO title="Termékek" />
-			<div className="container text-lg">
+			<div className="container text-lg px-4">
 				<div>
 					<ul className="flex flex-wrap w-full justify-around m-4">
 						{productCategories.map((category) => (
@@ -46,7 +46,7 @@ const ProductsPage = () => {
 						{products
 							.filter((product) => product.category === category.id)
 							.map((product) => (
-								<div className="flex flex-wrap mx-3 md:flex-column mb-8" id={product.id}>
+								<div className="flex flex-wrap md:flex-column mb-8" id={product.id}>
 									<div className="p-8 w-full xl:w-1/2 text-center">
 										<Img
 											fixed={getFixed(data.allFile.edges, product.imagename)}

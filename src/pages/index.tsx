@@ -36,11 +36,11 @@ const IndexPage = () => {
 				{/* Banner */}
 				<BackgroundImage id="banner" Tag="div" className="bg-gray-400 text-black bg-cover" fluid={fluidBanner}>
 					<div className="container" style={{ height: "500px" }}>
-						<div className="lg:w-2/3 xl:w-1/2 px-4"></div>
+						<div className="lg:w-2/3 xl:w-1/2 mx-4"></div>
 					</div>
 				</BackgroundImage>
 			</div>
-			<div className="container text-lg">
+			<div className="container text-lg px-4">
 				<h2 className="py-12 text-xl leading-tight font-semibold">Terméktípusok</h2>
 				{productCategories.map((category) => (
 					<div>
