@@ -28,8 +28,8 @@ const Footer = () => {
 			<section className="flex flex-col items-center sm:flex-row sm:justify-between max-w-screen-xl mx-auto sm:items-start p-3">
 				<div className="pb-12 flex flex-col md:w-1/3 items-center sm:items-start">
 					<h2 className="text-white uppercase font-semibold text-lg mb-1">Cégadatok</h2>
-					<div>Cégjegyzékszám: XX-XX-XXXXXX</div>
-					<div>Adószám: XXXXXXXX-X-XX</div>
+					<div>Cégjegyzékszám: 20-06-037456</div>
+					<div>Adószám: 21449455-2-20</div>
 				</div>
 				<div id="kapcsolat" className="flex items-center flex-col md:w-1/3 pb-12">
 					<h2 className="text-white uppercase font-semibold text-lg mb-1">Kapcsolat</h2>
@@ -43,7 +43,7 @@ const Footer = () => {
 								<path d="M1600 1240q0 27-10 70.5t-21 68.5q-21 50-122 106-94 51-186 51-27 0-53-3.5t-57.5-12.5-47-14.5-55.5-20.5-49-18q-98-35-175-83-127-79-264-216t-216-264q-48-77-83-175-3-9-18-49t-20.5-55.5-14.5-47-12.5-57.5-3.5-53q0-92 51-186 56-101 106-122 25-11 68.5-21t70.5-10q14 0 21 3 18 6 53 76 11 19 30 54t35 63.5 31 53.5q3 4 17.5 25t21.5 35.5 7 28.5q0 20-28.5 50t-62 55-62 53-28.5 46q0 9 5 22.5t8.5 20.5 14 24 11.5 19q76 137 174 235t235 174q2 1 19 11.5t24 14 20.5 8.5 22.5 5q18 0 46-28.5t53-62 55-62 50-28.5q14 0 28.5 7t35.5 21.5 25 17.5q25 15 53.5 31t63.5 35 54 30q70 35 76 53 3 7 3 21z" />
 							</svg>
 						</span>
-						<span>+36 (XX) XXX XXXX</span>
+						<span>+36 (46) 346 208</span>
 					</div>
 					<div>
 						<a
@@ -63,7 +63,7 @@ const Footer = () => {
 					</div>
 				</div>
 				<div className="flex flex-col md:w-1/3 items-center sm:items-end">
-					<h2 className="text-white uppercase font-semibold text-lg mb-1">CÍM</h2>
+					<h2 className="text-white uppercase font-semibold text-lg mb-1">AQSZTID Bt (2002)</h2>
 					<div className="hover:text-brand-blue">
 						<a
 							href="https://www.google.com/maps/place/Cserszegtomaj,+8372/@46.8018213,17.2429432,17.61z/data=!4m5!3m4!1s0x47691c52e234bf31:0x5b1ff7e39c7a89df!8m2!3d46.8036121!4d17.2327563"
@@ -77,10 +77,10 @@ const Footer = () => {
 								>
 									<path d="M1152 640q0-106-75-181t-181-75-181 75-75 181 75 181 181 75 181-75 75-181zm256 0q0 109-33 179l-364 774q-16 33-47.5 52t-67.5 19-67.5-19-46.5-52l-365-774q-33-70-33-179 0-212 150-362t362-150 362 150 150 362z" />
 								</svg>
-								<span itemProp="PostalAddress">Valamilyen utca 1</span>
+								<span itemProp="PostalAddress">Hóvirág u. 2</span>
 							</div>
 							<div itemScope itemType="http://schema.org/postalAddress">
-								H-<span itemProp="PostalCode">8372</span> Cserszegtomaj
+								H-<span itemProp="PostalCode">8314</span> Vonyarcvashegy
 							</div>
 						</a>
 					</div>

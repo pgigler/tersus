@@ -2,9 +2,9 @@ require("ts-node").register({ files: true });
 
 module.exports = {
 	siteMetadata: {
-		title: `TERSUS | Medencetisztítás`,
+		title: `AQSZTID | Medencetisztítás`,
 		description: `Medence- és egyéb tisztítószerekkel foglalkozó vállalkozás`,
-		author: `Tersus`,
+		author: `Aqsztid Bt`,
 	},
 	pathPrefix: `/tersus`,
 	plugins: [
