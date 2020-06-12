@@ -9,7 +9,7 @@ import { AnchorLink } from "gatsby-plugin-anchor-links";
 const UsefulInfoPage = () => {
 	const data = useStaticQuery(graphql`
 		query UsefulInfoPageQuery {
-			allFile(filter: { relativePath: { in: ["ui_pool.jpg", "ui_algae.jpg"] } }) {
+			allFile(filter: { relativePath: { in: ["ui_pool.jpg", "ui_algae.jpg", "ui_chemicals.png"] } }) {
 				edges {
 					node {
 						relativePath
@@ -27,6 +27,7 @@ const UsefulInfoPage = () => {
 
 	const fluidPool = getFluid(data.allFile.edges, "ui_pool.jpg");
 	const fluidAlgae = getFluid(data.allFile.edges, "ui_algae.jpg");
+	const fluidChemicals = getFluid(data.allFile.edges, "ui_chemicals.png");
 
 	return (
 		<Layout>
@@ -187,6 +188,41 @@ const UsefulInfoPage = () => {
 					</div>
 					<div className="p-8 w-full xl:w-1/2">
 						<Img fluid={fluidAlgae} alt="alga" />
+					</div>
+
+					<div className="w-full xl:w-1/2">
+						<h1 className="pt-12 text-4xl leading-tight font-semibold">Vegyszerek tárolása</h1>
+						<p className="mt-3">
+							A vegyszereket jól elzárva, hűvös, száraz és jól szellőzött helyiségben kell tárolni.
+						</p>
+						<p className="mt-3">A közvetlen napsugárzástól védeni kell.</p>
+						<p className="mt-3">
+							Az anyagokat élelmiszerekkel, könnyen korrodáló és könnyen gyúlékony anyagokkal együtt
+							tárolni nem szabad.
+						</p>
+						<p className="mt-3">Más vegyszerekkel nem szabad összekeverni.</p>
+						<p className="mt-3">A szemmel és a bőrrel való érintkezést kerülni kell.</p>
+						<p className="mt-3">
+							A szemmel vagy bőrrel való érintkezés után bő vízzel le kell mosni, majd a sérültet
+							esetlegesen orvosi ellátásban kell részesíteni.
+						</p>
+						<p className="mt-3">
+							Az összes vegyszert oly módon kell tárolni, hogy ahhoz gyermekek vagy illetéktelenek ne
+							férhessenek hozzá.
+						</p>
+						<p className="mt-3">
+							A termékek megfelelnek a hazai és a nemzetközi törvényi előírásoknak. A címkén a mindenkor
+							érvényben lévő veszély és biztonsági előírások fel vannak tüntetve. A csomagolások
+							megfelelnek a veszélyes anyagokra vonatkozó szállítási előírásoknak és a biztonság
+							legmagasabb fokát garantálják.
+						</p>
+						<p className="mt-3">
+							Minden esetben figyelmesen olvassa el az éppen használt vegyszer dobozán található
+							használati utasítást, különös tekintettel a javasolt adagolási arányokra.
+						</p>
+					</div>
+					<div className="p-8 w-full xl:w-1/2">
+						<Img fluid={fluidChemicals} alt="vegyszerek" />
 					</div>
 				</div>
 			</div>

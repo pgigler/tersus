@@ -57,7 +57,7 @@
     "build": "gatsby build",
     "rebuild": "npm run clean && npm run build",
     "dev": "gatsby develop",
-    "_deploy:uat:build": "gatsby build --prefix-paths",
+    "_deploy:uat:build": "gatsby clean && gatsby build --prefix-paths",
     "deploy:uat": "npm run _deploy:uat:build && node ./scripts/deploy.js",
     "format": "prettier --write \"**/*.{js,tsx,jsx,json,md}\"",
     "serve": "gatsby serve",
