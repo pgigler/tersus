@@ -24,7 +24,7 @@ const PrivacyPolicyPage = () => (
 			</p>
 			<h2 className="text-xl font-semibold py-4">Information About Us</h2>
 			<p>
-				Aqsztid Bt is a limited company registered address at 8314 Vonyarcvashegy, Hóvirág u. 2, e-mail:{" "}
+				Aqsztid Bt is a limited company registered address at 8314 Vonyarcvashegy, Hóvirág u. 2/3, e-mail:{" "}
 				<a className="text-brand-blue" href="mailto:info@tersus.hu">
 					info@tersus.hu
 				</a>

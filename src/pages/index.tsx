@@ -11,7 +11,7 @@ import GetInTouch from "../components/get-in-touch";
 const IndexPage = () => {
 	const data = useStaticQuery(graphql`
 		query IndexPageQuery {
-			allFile(filter: { relativePath: { in: ["banner/home.jpg"] } }) {
+			allFile(filter: { relativePath: { in: ["banner/home3.png"] } }) {
 				edges {
 					node {
 						relativePath
@@ -27,7 +27,7 @@ const IndexPage = () => {
 		}
 	`);
 
-	const fluidBanner = getFluid(data.allFile.edges, "banner/home.jpg");
+	const fluidBanner = getFluid(data.allFile.edges, "banner/home3.png");
 
 	return (
 		<Layout>
@@ -35,7 +35,7 @@ const IndexPage = () => {
 			<div className="text-brand-grayt">
 				{/* Banner */}
 				<BackgroundImage id="banner" Tag="div" className="bg-gray-400 text-black bg-cover" fluid={fluidBanner}>
-					<div className="container" style={{ height: "500px" }}>
+					<div className="container" style={{ height: "999px" }}>
 						<div className="lg:w-2/3 xl:w-1/2 mx-4"></div>
 					</div>
 				</BackgroundImage>
