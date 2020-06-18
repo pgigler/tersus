@@ -1,6 +1,106 @@
 [
 	{
 		"category": "kloros",
+		"popular": "0",
+		"price": "500",
+		"id": "stabil_klor_1",
+		"name": "Stabil Klór 1",
+		"subtitle": "uszodavíz-fertőtlenítő szer (tabletta)",
+		"imagename": "products/stabil_klor.jpg",
+		"sections": [
+			{
+				"title": "",
+				"ps": [
+					"Lassan oldódó, szabad aktívklór-tartalmú uszodavíz-fertőtlenítő szer.",
+					"Aktív hatóanyag tartalom: 90%",
+					"Hatóanyag: triklór-izocianursav.",
+					"Ideális klórkoncentráció a medence vízben: 0,3-1,0 mg/l.",
+					"A víz pH- értékét csökkenti. Túlzott használata pH- csökkenést okozhat.",
+					"Hatásos fertőtlenítéshez szükséges pH-érték: 7,2-7,4. A szer használata mellett kötelező a kéthetenkénti minimum 3%-os vízcsere!"
+				]
+			},
+			{
+				"title": "Adagolás",
+				"ps": [
+					"Feltöltéskor: a kezdeti szabad-aktív klórkoncentráció gyors kialakításához használjon ALGA-SOKK P klór granulátumot, amelyből 10 m3 vízhez 9 g (egy csapott evőkanál) szükséges. Így a medencében kialakult klórkoncentráció 0,5 mg/l lesz",
+					"Folyamatos használat esetén az átlagos felhasználás 20 m3 vízre hetenként 1 db Stabil klór tabletta. Használjon állítható vegyszerbeoldót, hogy a tabletta egyenletesen, több nap alatt oldódjon fel. A szabad-aktív klórszint optimális értéke a medencevízben 0,3–1 mg/l között van. Kánikula, több fürdőző, vihar esetén az adagolást emelni kell."
+				]
+			},
+			{
+				"title": "Mérése",
+				"ps": ["klór-pH mérőcsík"]
+			},
+			{
+				"title": "Halmazállapot",
+				"ps": ["szilárd (tabletta)"]
+			},
+			{
+				"title": "Hatóanyag",
+				"ps": ["Triklór-izocianursav"]
+			},
+			{
+				"title": "Kiszerelés",
+				"ps": ["1 kg-os doboz"]
+			}
+		],
+		"warnings": [
+			"A biocidokat biztonságosan alkalmazza!",
+			"Használat előtt mindig olvassa el a címkét és a használati utasítást!"
+		]
+	},
+	{
+		"category": "kloros",
+		"popular": "2",
+		"price": "500",
+		"id": "stabil_klor_2",
+		"name": "Stabil Klór 2",
+		"subtitle": "uszodavíz-fertőtlenítő szer (tabletta)",
+		"imagename": "products/stabil_klor.jpg",
+		"sections": [
+			{
+				"title": "",
+				"ps": [
+					"Lassan oldódó, szabad aktívklór-tartalmú uszodavíz-fertőtlenítő szer.",
+					"Aktív hatóanyag tartalom: 90%",
+					"Hatóanyag: triklór-izocianursav.",
+					"Ideális klórkoncentráció a medence vízben: 0,3-1,0 mg/l.",
+					"A víz pH- értékét csökkenti. Túlzott használata pH- csökkenést okozhat.",
+					"Hatásos fertőtlenítéshez szükséges pH-érték: 7,2-7,4. A szer használata mellett kötelező a kéthetenkénti minimum 3%-os vízcsere!"
+				]
+			},
+			{
+				"title": "Adagolás",
+				"ps": [
+					"Feltöltéskor: a kezdeti szabad-aktív klórkoncentráció gyors kialakításához használjon ALGA-SOKK P klór granulátumot, amelyből 10 m3 vízhez 9 g (egy csapott evőkanál) szükséges. Így a medencében kialakult klórkoncentráció 0,5 mg/l lesz",
+					"Folyamatos használat esetén az átlagos felhasználás 20 m3 vízre hetenként 1 db Stabil klór tabletta. Használjon állítható vegyszerbeoldót, hogy a tabletta egyenletesen, több nap alatt oldódjon fel. A szabad-aktív klórszint optimális értéke a medencevízben 0,3–1 mg/l között van. Kánikula, több fürdőző, vihar esetén az adagolást emelni kell."
+				]
+			},
+			{
+				"title": "Mérése",
+				"ps": ["klór-pH mérőcsík"]
+			},
+			{
+				"title": "Halmazállapot",
+				"ps": ["szilárd (tabletta)"]
+			},
+			{
+				"title": "Hatóanyag",
+				"ps": ["Triklór-izocianursav"]
+			},
+			{
+				"title": "Kiszerelés",
+				"ps": ["1 kg-os doboz"]
+			}
+		],
+		"warnings": [
+			"A biocidokat biztonságosan alkalmazza!",
+			"Használat előtt mindig olvassa el a címkét és a használati utasítást!"
+		]
+	},
+	{
+		"category": "kloros",
+		"popular": "2",
+		"price": "1000",
 		"id": "stabil_klor",
 		"name": "Stabil Klór",
 		"subtitle": "uszodavíz-fertőtlenítő szer (tabletta)",
@@ -47,7 +147,156 @@
 		]
 	},
 	{
+		"category": "kloros",
+		"popular": "3",
+		"price": "1200",
+		"id": "stabil_klor_3",
+		"name": "Stabil Klór 3",
+		"subtitle": "uszodavíz-fertőtlenítő szer (tabletta)",
+		"imagename": "products/stabil_klor.jpg",
+		"sections": [
+			{
+				"title": "",
+				"ps": [
+					"Lassan oldódó, szabad aktívklór-tartalmú uszodavíz-fertőtlenítő szer.",
+					"Aktív hatóanyag tartalom: 90%",
+					"Hatóanyag: triklór-izocianursav.",
+					"Ideális klórkoncentráció a medence vízben: 0,3-1,0 mg/l.",
+					"A víz pH- értékét csökkenti. Túlzott használata pH- csökkenést okozhat.",
+					"Hatásos fertőtlenítéshez szükséges pH-érték: 7,2-7,4. A szer használata mellett kötelező a kéthetenkénti minimum 3%-os vízcsere!"
+				]
+			},
+			{
+				"title": "Adagolás",
+				"ps": [
+					"Feltöltéskor: a kezdeti szabad-aktív klórkoncentráció gyors kialakításához használjon ALGA-SOKK P klór granulátumot, amelyből 10 m3 vízhez 9 g (egy csapott evőkanál) szükséges. Így a medencében kialakult klórkoncentráció 0,5 mg/l lesz",
+					"Folyamatos használat esetén az átlagos felhasználás 20 m3 vízre hetenként 1 db Stabil klór tabletta. Használjon állítható vegyszerbeoldót, hogy a tabletta egyenletesen, több nap alatt oldódjon fel. A szabad-aktív klórszint optimális értéke a medencevízben 0,3–1 mg/l között van. Kánikula, több fürdőző, vihar esetén az adagolást emelni kell."
+				]
+			},
+			{
+				"title": "Mérése",
+				"ps": ["klór-pH mérőcsík"]
+			},
+			{
+				"title": "Halmazállapot",
+				"ps": ["szilárd (tabletta)"]
+			},
+			{
+				"title": "Hatóanyag",
+				"ps": ["Triklór-izocianursav"]
+			},
+			{
+				"title": "Kiszerelés",
+				"ps": ["1 kg-os doboz"]
+			}
+		],
+		"warnings": [
+			"A biocidokat biztonságosan alkalmazza!",
+			"Használat előtt mindig olvassa el a címkét és a használati utasítást!"
+		]
+	},
+	{
+		"category": "kloros",
+		"popular": "2",
+		"price": "2400",
+		"id": "stabil_klor_4",
+		"name": "Stabil Klór 4",
+		"subtitle": "uszodavíz-fertőtlenítő szer (tabletta)",
+		"imagename": "products/stabil_klor.jpg",
+		"sections": [
+			{
+				"title": "",
+				"ps": [
+					"Lassan oldódó, szabad aktívklór-tartalmú uszodavíz-fertőtlenítő szer.",
+					"Aktív hatóanyag tartalom: 90%",
+					"Hatóanyag: triklór-izocianursav.",
+					"Ideális klórkoncentráció a medence vízben: 0,3-1,0 mg/l.",
+					"A víz pH- értékét csökkenti. Túlzott használata pH- csökkenést okozhat.",
+					"Hatásos fertőtlenítéshez szükséges pH-érték: 7,2-7,4. A szer használata mellett kötelező a kéthetenkénti minimum 3%-os vízcsere!"
+				]
+			},
+			{
+				"title": "Adagolás",
+				"ps": [
+					"Feltöltéskor: a kezdeti szabad-aktív klórkoncentráció gyors kialakításához használjon ALGA-SOKK P klór granulátumot, amelyből 10 m3 vízhez 9 g (egy csapott evőkanál) szükséges. Így a medencében kialakult klórkoncentráció 0,5 mg/l lesz",
+					"Folyamatos használat esetén az átlagos felhasználás 20 m3 vízre hetenként 1 db Stabil klór tabletta. Használjon állítható vegyszerbeoldót, hogy a tabletta egyenletesen, több nap alatt oldódjon fel. A szabad-aktív klórszint optimális értéke a medencevízben 0,3–1 mg/l között van. Kánikula, több fürdőző, vihar esetén az adagolást emelni kell."
+				]
+			},
+			{
+				"title": "Mérése",
+				"ps": ["klór-pH mérőcsík"]
+			},
+			{
+				"title": "Halmazállapot",
+				"ps": ["szilárd (tabletta)"]
+			},
+			{
+				"title": "Hatóanyag",
+				"ps": ["Triklór-izocianursav"]
+			},
+			{
+				"title": "Kiszerelés",
+				"ps": ["1 kg-os doboz"]
+			}
+		],
+		"warnings": [
+			"A biocidokat biztonságosan alkalmazza!",
+			"Használat előtt mindig olvassa el a címkét és a használati utasítást!"
+		]
+	},
+	{
+		"category": "kloros",
+		"popular": "5",
+		"price": "700",
+		"id": "stabil_klor_5",
+		"name": "Stabil Klór",
+		"subtitle": "uszodavíz-fertőtlenítő szer (tabletta)",
+		"imagename": "products/stabil_klor.jpg",
+		"sections": [
+			{
+				"title": "",
+				"ps": [
+					"Lassan oldódó, szabad aktívklór-tartalmú uszodavíz-fertőtlenítő szer.",
+					"Aktív hatóanyag tartalom: 90%",
+					"Hatóanyag: triklór-izocianursav.",
+					"Ideális klórkoncentráció a medence vízben: 0,3-1,0 mg/l.",
+					"A víz pH- értékét csökkenti. Túlzott használata pH- csökkenést okozhat.",
+					"Hatásos fertőtlenítéshez szükséges pH-érték: 7,2-7,4. A szer használata mellett kötelező a kéthetenkénti minimum 3%-os vízcsere!"
+				]
+			},
+			{
+				"title": "Adagolás",
+				"ps": [
+					"Feltöltéskor: a kezdeti szabad-aktív klórkoncentráció gyors kialakításához használjon ALGA-SOKK P klór granulátumot, amelyből 10 m3 vízhez 9 g (egy csapott evőkanál) szükséges. Így a medencében kialakult klórkoncentráció 0,5 mg/l lesz",
+					"Folyamatos használat esetén az átlagos felhasználás 20 m3 vízre hetenként 1 db Stabil klór tabletta. Használjon állítható vegyszerbeoldót, hogy a tabletta egyenletesen, több nap alatt oldódjon fel. A szabad-aktív klórszint optimális értéke a medencevízben 0,3–1 mg/l között van. Kánikula, több fürdőző, vihar esetén az adagolást emelni kell."
+				]
+			},
+			{
+				"title": "Mérése",
+				"ps": ["klór-pH mérőcsík"]
+			},
+			{
+				"title": "Halmazállapot",
+				"ps": ["szilárd (tabletta)"]
+			},
+			{
+				"title": "Hatóanyag",
+				"ps": ["Triklór-izocianursav"]
+			},
+			{
+				"title": "Kiszerelés",
+				"ps": ["1 kg-os doboz"]
+			}
+		],
+		"warnings": [
+			"A biocidokat biztonságosan alkalmazza!",
+			"Használat előtt mindig olvassa el a címkét és a használati utasítást!"
+		]
+	},
+	{
 		"category": "algaszabalyozas",
+		"popular": "1",
+		"price": "500",
 		"id": "alga_sokk_p",
 		"name": "Alga-Sokk P",
 		"subtitle": "uszodavíz-fertőtlenítő és sokkoló szer",

@@ -69,12 +69,12 @@ module.exports = {
 				whitelist: ["duration-1000"],
 			},
 		},
-		{
-			resolve: `gatsby-plugin-anchor-links`,
-			options: {
-				offset: -100,
-			},
-		},
+		// {
+		// 	resolve: `gatsby-plugin-anchor-links`,
+		// 	options: {
+		// 		offset: -100,
+		// 	},
+		// },
 		// this (optional) plugin enables Progressive Web App + Offline functionality
 		// To learn more, visit: https://gatsby.dev/offline
 		// `gatsby-plugin-offline`,

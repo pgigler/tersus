@@ -8,13 +8,21 @@
 	@apply border uppercase text-center px-10 py-2 inline-block;
 
 	&.btn-primary {
-		@apply text-white uppercase whitespace-no-wrap text-xl;
+		@apply text-white uppercase whitespace-no-wrap text-xl duration-500;
 	}
 
 	&:hover {
 		&.btn-primary {
 			@apply bg-white text-brand-blue duration-500;
 		}
+	}
+}
+
+.title {
+	@apply text-3xl uppercase font-semibold;
+
+	&.title-wide {
+		@apply tracking-widest;
 	}
 }
 

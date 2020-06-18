@@ -7,6 +7,7 @@ import { getFluid } from "../util/helper";
 import BackgroundImage from "gatsby-background-image";
 import productCategories from "../data/product_categories.json";
 import GetInTouch from "../components/get-in-touch";
+import ProductCarousel from "../components/product-carousel";
 
 const IndexPage = () => {
 	const data = useStaticQuery(graphql`
@@ -44,7 +45,7 @@ const IndexPage = () => {
 						<div className="container" style={{ height: "999px" }}>
 							<div className="lg:ml-56 h-full text-white flex ml-6">
 								<div className="mt-48 w-1/2">
-									<div className="text-6xl tracking-wide uppercase font-semibold font-sans">
+									<div className="text-4xl sm:text-6xl tracking-wide uppercase font-semibold font-sans">
 										<span className="whitespace-no-wrap">A kristálytiszta</span> élményért
 									</div>
 									<div className="mt-4">
@@ -58,10 +59,15 @@ const IndexPage = () => {
 					</BackgroundImage>
 				</div>
 			</div>
+			{/* Popular products */}
+			<div>
+				<h2 className="py-12 w-full text-center title title-wide">Népszerű termékeink</h2>
+				<ProductCarousel count={4} />
+			</div>
+			{/* Product Categories */}
 			<div className="container text-lg px-4">
-				<h2 className="py-12 text-xl leading-tight font-semibold">Terméktípusok</h2>
-				{productCategories.map((category) => (
-					<div>
+				{productCategories.map((category, i) => (
+					<div key={i}>
 						<Link to={category.slug} className="pt-8 text-xl leading-tight link">
 							{category.name}
 						</Link>
