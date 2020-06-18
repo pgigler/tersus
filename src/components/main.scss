@@ -5,17 +5,15 @@
 @tailwind utilities;
 
 .btn {
-	@apply bg-brand-blue uppercase text-center px-6 py-2 inline-block;
+	@apply border uppercase text-center px-10 py-2 inline-block;
 
 	&.btn-primary {
-		a {
-			@apply text-white uppercase whitespace-no-wrap;
-		}
+		@apply text-white uppercase whitespace-no-wrap text-xl;
 	}
 
 	&:hover {
 		&.btn-primary {
-			@apply bg-brand-gray3;
+			@apply bg-white text-brand-blue duration-500;
 		}
 	}
 }
