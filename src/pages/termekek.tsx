@@ -48,7 +48,7 @@ const ProductsPage = () => {
 								.filter((product) => product.category === category.id)
 								.map((product) => (
 									<div className="w-full sm:w-1/2 lg:w-1/4 px-12 py-12" id={product.id}>
-										<Link to={`/products/${product.id}`}>
+										<Link to={`/termekek/${product.id}`}>
 											<div className="flex flex-col items-center">
 												<div>
 													<Img

@@ -134,7 +134,7 @@ const ProductCarousel = (props: { count: number }) => {
 						<div className=" flex" style={{ width: `5000px` }}>
 							{itemList.map((product, i) => (
 								<div key={i} className="p-4 relative" style={getItemStyle()}>
-									<Link to={`/products/${product.id}`}>
+									<Link to={`/termekek/${product.id}`}>
 										<div className="flex justify-around">
 											<div>
 												<div>

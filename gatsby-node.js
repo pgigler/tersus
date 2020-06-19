@@ -22,7 +22,7 @@ exports.createPages = async ({ actions: { createPage }, graphql }) => {
 	`);
 
 	result.data.allProductsJson.edges.forEach(({ node }) => {
-		const slug = `/products/${node.id}`;
+		const slug = `/termekek/${node.id}`;
 		createPage({
 			path: slug,
 			component: productItemTemplate,

@@ -27,23 +27,26 @@ const ProductItemTemplate = ({ pageContext }) => {
 		<Layout>
 			<SEO title="Product" />
 			<div className="container">
-				<div>
+				<div className="pt-4 px-4">
 					{products
 						.filter((product) => product.id === pageContext.productId)
 						.map((product) => (
 							<div className="flex flex-wrap md:flex-column mb-8" id={product.id}>
-								<div className="p-8 xl:w-1/2 text-center">
+								<div className="w-full md:w-1/2 text-center mb-8">
+									<h1 className="text-4xl leading-tight font-semibold mb-4">{product.name}</h1>
 									<div>
 										<Img
 											fixed={getFixed(data.allFile.edges, product.imagename)}
 											alt="{product.name}"
 										/>
 									</div>
+									<div className="text-xl font-semibold">{product.price} Ft</div>
 									<button className="mt-4 btn btn-primary">Kosárba</button>
 								</div>
-								<div className="w-full xl:w-1/2">
-									<h1 className="pt-12 text-4xl leading-tight font-semibold">{product.name}</h1>
-									<h2 className="pt-1 text-xl leading-tight font-semibold">{product.subtitle}</h2>
+								<div className="w-full md:w-1/2">
+									<h2 className="pt-1 text-xl leading-tight uppercase font-semibold">
+										{product.subtitle}
+									</h2>
 									{product.sections ? (
 										<div>
 											{product.sections.map((section) => (
