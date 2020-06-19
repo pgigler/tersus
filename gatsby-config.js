@@ -8,6 +8,7 @@ module.exports = {
 	},
 	pathPrefix: `/tersus`,
 	plugins: [
+		`gatsby-transformer-json`,
 		`gatsby-plugin-react-helmet`,
 		{
 			resolve: `gatsby-source-filesystem`,

@@ -6,8 +6,29 @@
 
 // You can delete this file if you're not using it
 require("ts-node").register({ files: true });
-const { paginate } = require("gatsby-awesome-pagination");
 
 exports.createPages = async ({ actions: { createPage }, graphql }) => {
-	
+	const productItemTemplate = require.resolve(`./src/templates/product-item.tsx`);
+	const result = await graphql(`
+		query AllProductsQuery {
+			allProductsJson {
+				edges {
+					node {
+						id
+					}
+				}
+			}
+		}
+	`);
+
+	result.data.allProductsJson.edges.forEach(({ node }) => {
+		const slug = `/products/${node.id}`;
+		createPage({
+			path: slug,
+			component: productItemTemplate,
+			context: {
+				productId: node.id,
+			},
+		});
+	});
 };

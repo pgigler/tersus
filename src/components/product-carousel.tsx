@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import products from "../data/products.json";
-import { useStaticQuery, graphql } from "gatsby";
-import { getFixed, shiftRight, shiftLeft, getFluid } from "../util/helper";
+import { Link, useStaticQuery, graphql } from "gatsby";
+import { shiftRight, shiftLeft, getFluid } from "../util/helper";
 import Img from "gatsby-image";
 import { useWindowSize } from "../util/customhooks";
 
@@ -134,19 +134,21 @@ const ProductCarousel = (props: { count: number }) => {
 						<div className=" flex" style={{ width: `5000px` }}>
 							{itemList.map((product, i) => (
 								<div key={i} className="p-4 relative" style={getItemStyle()}>
-									<div className="flex justify-around">
-										<div>
+									<Link to={`/products/${product.id}`}>
+										<div className="flex justify-around">
 											<div>
-												<Img
-													style={{ maxWidth: "200px", width: `${getItemWidth() - 50}px` }}
-													fluid={getFluid(data.allFile.edges, product.imagename)}
-													alt="{product.name}"
-												/>
+												<div>
+													<Img
+														style={{ maxWidth: "200px", width: `${getItemWidth() - 50}px` }}
+														fluid={getFluid(data.allFile.edges, product.imagename)}
+														alt="{product.name}"
+													/>
+												</div>
+												<div className="text-center text-xl font-semibold">{product.name}</div>
+												<div className="text-center">{product.price} Ft</div>
 											</div>
-											<div className="text-center text-xl font-semibold">{product.name}</div>
-											<div className="text-center">{product.price} Ft</div>
 										</div>
-									</div>
+									</Link>
 								</div>
 							))}
 						</div>
