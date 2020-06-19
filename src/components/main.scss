@@ -7,12 +7,16 @@
 .btn {
 	@apply border uppercase text-center px-10 py-2 inline-block;
 
-	&.btn-primary {
+	&.btn-primary-inv {
 		@apply text-white uppercase whitespace-no-wrap text-xl duration-500;
+		&:hover {
+			@apply bg-white text-brand-blue duration-500;
+		}
 	}
 
-	&:hover {
-		&.btn-primary {
+	&.btn-primary {
+		@apply text-white bg-brand-blue uppercase whitespace-no-wrap text-xl duration-500;
+		&:hover {
 			@apply bg-white text-brand-blue duration-500;
 		}
 	}

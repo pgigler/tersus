@@ -107,7 +107,7 @@ const ProductCarousel = (props: { count: number }) => {
 	};
 
 	return (
-		<div id="productCarousel" className="flex justify-around">
+		<div id="productCarousel" className="flex justify-around select-none">
 			<div className="flex items-center">
 				<div className="flex justify-end cursor-pointer" onClick={prev}>
 					<div>
@@ -143,7 +143,7 @@ const ProductCarousel = (props: { count: number }) => {
 													alt="{product.name}"
 												/>
 											</div>
-											<div className="text-center">{product.name}</div>
+											<div className="text-center text-xl font-semibold">{product.name}</div>
 											<div className="text-center">{product.price} Ft</div>
 										</div>
 									</div>

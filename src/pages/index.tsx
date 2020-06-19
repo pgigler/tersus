@@ -5,9 +5,9 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { getFluid } from "../util/helper";
 import BackgroundImage from "gatsby-background-image";
-import productCategories from "../data/product_categories.json";
 import GetInTouch from "../components/get-in-touch";
 import ProductCarousel from "../components/product-carousel";
+import ProductCategories from "../components/product-categories";
 
 const IndexPage = () => {
 	const data = useStaticQuery(graphql`
@@ -50,7 +50,7 @@ const IndexPage = () => {
 									</div>
 									<div className="mt-4">
 										<Link to="/termekek">
-											<div className="btn btn-primary">Vásárlás</div>
+											<div className="btn btn-primary-inv">Vásárlás</div>
 										</Link>
 									</div>
 								</div>
@@ -59,27 +59,21 @@ const IndexPage = () => {
 					</BackgroundImage>
 				</div>
 			</div>
+
 			{/* Popular products */}
-			<div>
-				<h2 className="py-12 w-full text-center title title-wide">Népszerű termékeink</h2>
+			<div className="py-12">
+				<h2 className="pb-4 w-full text-center title title-wide">Népszerű termékeink</h2>
 				<ProductCarousel count={4} />
+				<div className="mb-12 flex justify-around">
+					<Link to="/termekek">
+						<div className="btn btn-primary">Vásárlás</div>
+					</Link>
+				</div>
 			</div>
+
 			{/* Product Categories */}
-			<div className="container text-lg px-4">
-				{productCategories.map((category, i) => (
-					<div key={i}>
-						<Link to={category.slug} className="pt-8 text-xl leading-tight link">
-							{category.name}
-						</Link>
-						<div>{category.shortDescription}</div>
-					</div>
-				))}
-				<h2 className="pt-12 text-xl leading-tight font-semibold">Fertőtlenítés</h2>
-				<p className="mt-3">Szöveg</p>
-				<h2 className="pt-12 text-xl leading-tight font-semibold">Algaképződés megakadályozása</h2>
-				<p className="mt-3">Szöveg</p>
-				<h2 className="pt-12 text-xl leading-tight font-semibold">Vízkőtlenítés</h2>
-				<p className="my-3">Szöveg</p>
+			<div className="">
+				<ProductCategories />
 			</div>
 			<GetInTouch />
 		</Layout>

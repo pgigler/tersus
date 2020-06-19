@@ -17,6 +17,7 @@ module.exports = {
 			yellow: colors.yellow,
 			brand: {
 				blue: "#4dacc9",
+				blue1: "#d8edf3",
 				gray1: "#34383d",
 				gray2: "#40454b",
 				gray3: "#acacac",

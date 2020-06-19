@@ -3,36 +3,42 @@
 		"id": "kloros",
 		"name": "Klóros",
 		"slug": "/termekek#kloros",
-		"shortDescription": "Klóros termékek"
+		"imagename": "productcategories/kloros.jpg",
+		"shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu vehicula velit. Praesent dapibus augue purus, at ullamcorper tellus facilisis sit amet. Praesent placerat arcu nisi, iaculis arcu accumsan id. Duis vitae tellus ac dui mollis aliquam. Phasellus nibh arcu, vestibulum sed libero ac, pretium maximus justo."
 	},
 	{
 		"id": "klormentes",
 		"name": "Klórmentes",
 		"slug": "/termekek#klormentes",
-		"shortDescription": "Klórmentes termékek leírás"
+		"imagename": "productcategories/klormentes.jpg",
+		"shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu metus quam. Quisque dapibus nulla odio, eu commodo mi luctus et."
 	},
 	{
 		"id": "ph-szabalyozas",
 		"name": "PH-szabályozás",
 		"slug": "/termekek#ph-szabalyozas",
-		"shortDescription": "PH-szabályozás leírás"
+		"imagename": "productcategories/phszab.jpg",
+		"shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu metus quam. Quisque dapibus nulla odio, eu commodo mi luctus et."
 	},
 	{
 		"id": "pelyhesites",
 		"name": "Pelyhesítés",
 		"slug": "/termekek#pelyhesites",
-		"shortDescription": "Pelyhesítés leírás"
+		"imagename": "productcategories/pelyhesites.jpg",
+		"shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu metus quam. Quisque dapibus nulla odio, eu commodo mi luctus et."
 	},
 	{
 		"id": "algaszabalyozas",
 		"name": "Algaszabályozás",
 		"slug": "/termekek#algaszabalyozas",
-		"shortDescription": "Algaszabályozás leírás"
+		"imagename": "productcategories/algaszab.jpg",
+		"shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu metus quam. Quisque dapibus nulla odio, eu commodo mi luctus et."
 	},
 	{
 		"id": "kiegeszitok",
 		"name": "Kiegészítők",
 		"slug": "/termekek#kiegeszitok",
-		"shortDescription": "Kiegészítő termékek leírás"
+		"imagename": "productcategories/kiegeszitok.jpg",
+		"shortDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu metus quam. Quisque dapibus nulla odio, eu commodo mi luctus et."
 	}
 ]
