@@ -217,8 +217,8 @@ const UsefulInfoPage = () => {
 			imagePath: "ui_algae.jpg",
 		},
 		{
-			id: "vegyszerek_kezelese",
-			title: "Vegyszerek kezelése",
+			id: "vegyszerek_tarolasa",
+			title: "Vegyszerek tárolása",
 			template: ChemicalsHandling,
 			imagePath: "ui_chemicals.png",
 		},
@@ -258,7 +258,7 @@ const UsefulInfoPage = () => {
 								))}
 						</div>
 					</div>
-					<div className="w-full sm:w-1/2">
+					<div className="w-full sm:w-1/2 mt-4">
 						{articles
 							.filter((article) => hash.indexOf(article.id) > -1)
 							.map((article) => (

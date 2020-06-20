@@ -14,7 +14,7 @@ const productComparer = (p1: any, p2: any) => {
 products.sort(productComparer);
 const initialProducts = shiftRight(products);
 
-const transitionDuration = 500;
+const transitionDuration = 400;
 
 // const productsList = ["1", "2", "3", "4", "5", "6"];
 
@@ -55,7 +55,7 @@ const ProductCarousel = (props: { count: number }) => {
 				globalThis.setTimeout(() => {
 					setTransitionState("none");
 				}, transitionDuration);
-			});
+			}, 20);
 		}
 	}, [transitionState]);
 
