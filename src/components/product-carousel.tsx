@@ -12,10 +12,14 @@ const productComparer = (p1: any, p2: any) => {
 };
 
 products.sort(productComparer);
+const initialProducts = shiftRight(products);
+
+const transitionDuration = 500;
 
 // const productsList = ["1", "2", "3", "4", "5", "6"];
 
-type AnimationType = "prev" | "next" | "none";
+type Direction = "prev" | "next";
+type TransitionState = "start" | "animating" | "none";
 
 const ProductCarousel = (props: { count: number }) => {
 	const data = useStaticQuery(graphql`
@@ -36,23 +40,24 @@ const ProductCarousel = (props: { count: number }) => {
 	`);
 
 	const [width] = useWindowSize();
-	const [itemList, setItemList] = useState(shiftRight(products));
-	const [startAnimation, setStartAnimation] = useState<AnimationType>("none");
-	const [animating, setAnimating] = useState<AnimationType>("none");
-	const [touchCarouselStartX, setTouchCarouselStartX] = useState<number>(0);
-	const [touchCarouselEndX, setTouchCarouselEndX] = useState<number>(0);
+	const [itemList, setItemList] = useState(initialProducts);
+	const [transitionState, setTransitionState] = useState<TransitionState>("none");
+	const [direction, setDirection] = useState<Direction>("prev");
+	const [touchCarouselStart, setTouchCarouselStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+	const [touchCarouselEnd, setTouchCarouselEnd] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
 	// Effects
 
 	useEffect(() => {
-		if (startAnimation !== "none") {
-			setAnimating(startAnimation);
-			setStartAnimation("none");
-			const timer = globalThis.setTimeout(() => {
-				setAnimating("none");
-			}, 500);
+		if (transitionState === "start") {
+			globalThis.setTimeout(() => {
+				setTransitionState("animating");
+				globalThis.setTimeout(() => {
+					setTransitionState("none");
+				}, transitionDuration);
+			});
 		}
-	}, [startAnimation]);
+	}, [transitionState]);
 
 	// Helpers
 
@@ -74,8 +79,9 @@ const ProductCarousel = (props: { count: number }) => {
 		const itemWidth = getItemWidth();
 		let offset = -itemWidth;
 		let transition = "0ms";
-		if (startAnimation !== "none") {
-			switch (startAnimation) {
+
+		if (transitionState === "start") {
+			switch (direction) {
 				case "prev":
 					offset = -2 * itemWidth;
 					break;
@@ -86,9 +92,12 @@ const ProductCarousel = (props: { count: number }) => {
 					offset = 0;
 					break;
 			}
-		} else if (animating !== "none") {
-			transition = "500ms";
 		}
+
+		if (transitionState === "animating") {
+			transition = transitionDuration + "ms";
+		}
+
 		return { width: `${itemWidth}px`, left: `${offset}px`, transition };
 	};
 
@@ -97,13 +106,19 @@ const ProductCarousel = (props: { count: number }) => {
 	};
 
 	const prev = () => {
-		setItemList(shiftRight(itemList));
-		setStartAnimation("prev");
+		if (transitionState === "none") {
+			setItemList(shiftRight(itemList));
+			setDirection("prev");
+			setTransitionState("start");
+		}
 	};
 
 	const next = () => {
-		setItemList(shiftLeft(itemList));
-		setStartAnimation("next");
+		if (transitionState === "none") {
+			setItemList(shiftLeft(itemList));
+			setDirection("next");
+			setTransitionState("start");
+		}
 	};
 
 	return (
@@ -122,11 +137,21 @@ const ProductCarousel = (props: { count: number }) => {
 				</div>
 				<div
 					className="px-4 flex justify-around"
-					onTouchStart={(e: React.TouchEvent) => setTouchCarouselStartX(e.touches[0].clientX)}
-					onTouchMove={(e: React.TouchEvent) => setTouchCarouselEndX(e.touches[0].clientX)}
+					onTouchStart={(e: React.TouchEvent) =>
+						setTouchCarouselStart({ x: e.touches[0].clientX, y: e.touches[0].clientY })
+					}
+					onTouchMove={(e: React.TouchEvent) =>
+						setTouchCarouselEnd({ x: e.touches[0].clientX, y: e.touches[0].clientY })
+					}
 					onTouchEnd={(e: React.TouchEvent) => {
-						if (animating === "none" && touchCarouselEndX !== touchCarouselStartX) {
-							touchCarouselEndX - touchCarouselStartX < 0 ? next() : prev();
+						const dx = Math.abs(touchCarouselEnd.x - touchCarouselStart.x);
+						const dy = Math.abs(touchCarouselEnd.y - touchCarouselStart.y);
+						if (transitionState === "none" && dx > dy && dx > 10) {
+							if (touchCarouselEnd.x - touchCarouselStart.x < 0) {
+								next();
+							} else {
+								prev();
+							}
 						}
 					}}
 				>

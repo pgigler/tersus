@@ -59,7 +59,7 @@
     "rebuild": "npm run clean && npm run build",
     "dev": "gatsby develop",
     "_deploy:uat:build": "gatsby clean && gatsby build --prefix-paths",
-    "deploy:uat": "npm run _deploy:uat:build && node ./scripts/deploy.js",
+    "deploy:uat": "npm run _deploy:uat:build && node ./scripts/deploy.js && npm run clean",
     "format": "prettier --write \"**/*.{js,tsx,jsx,json,md}\"",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",

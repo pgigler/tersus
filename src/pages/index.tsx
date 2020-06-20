@@ -42,9 +42,9 @@ const IndexPage = () => {
 						className="bg-gray-400 text-black bg-cover"
 						fluid={fluidBanner}
 					>
-						<div className="container" style={{ height: "999px" }}>
-							<div className="lg:ml-56 h-full text-white flex ml-6">
-								<div className="mt-48 w-1/2">
+						<div className="banner">
+							<div className="lg:ml-56 text-white flex ml-6">
+								<div className="banner-text w-1/2">
 									<div className="text-4xl sm:text-6xl tracking-wide uppercase font-semibold font-sans">
 										<span className="whitespace-no-wrap">A kristálytiszta</span> élményért
 									</div>

@@ -50,7 +50,7 @@
 	},
 	{
 		"category": "kloros",
-		"popular": "2",
+		"popular": "1",
 		"price": "500",
 		"id": "stabil_klor_2",
 		"name": "Stabil Klór 2",
@@ -101,8 +101,8 @@
 		"category": "kloros",
 		"popular": "2",
 		"price": "1000",
-		"id": "stabil_klor",
-		"name": "Stabil Klór",
+		"id": "stabil_klor_21",
+		"name": "Stabil Klór 2.1",
 		"subtitle": "uszodavíz-fertőtlenítő szer (tabletta)",
 		"imagename": "products/stabil_klor.jpg",
 		"sections": [
@@ -197,7 +197,7 @@
 	},
 	{
 		"category": "kloros",
-		"popular": "2",
+		"popular": "4",
 		"price": "2400",
 		"id": "stabil_klor_4",
 		"name": "Stabil Klór 4",
@@ -295,7 +295,7 @@
 	},
 	{
 		"category": "algaszabalyozas",
-		"popular": "1",
+		"popular": "6",
 		"price": "500",
 		"id": "alga_sokk_p",
 		"name": "Alga-Sokk P",
