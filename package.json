@@ -25,6 +25,7 @@
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "@typescript-eslint/parser": "^2.32.0",
+    "chalk": "^4.1.0",
     "cpx": "^1.5.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.0.0",
@@ -46,6 +47,8 @@
     "node-sass": "^4.14.1",
     "prettier": "2.0.5",
     "remark-image-attributes": "^0.1.3",
+    "sftp-sync-deploy": "^0.7.1",
+    "ssh-exec": "^2.0.0",
     "stylelint": "^13.3.3",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-scss": "^3.17.2",
@@ -61,12 +64,13 @@
     "dev": "gatsby develop",
     "_deploy:uat:build": "gatsby clean && gatsby build --prefix-paths",
     "deploy:uat": "npm run _deploy:uat:build && node ./scripts/deployuat.js && npm run clean",
-    "_deploy:prod:build": "gatsby clean && gatsby build && cpx CNAME public",
+    "_deploy:prod:build": "gatsby clean && gatsby build",
     "deploy:prod": "npm run _deploy:prod:build && node ./scripts/deployprod.js && npm run clean",
-    "deploy:prod:m": "node ./scripts/deployprodmaintenace.js",
+    "deploy:prod:sorry": "node ./scripts/deployprodsorry.js",
     "format": "prettier --write \"**/*.{js,tsx,jsx,json,md}\"",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "ngrok": "C:/utils/ngrok/ngrok.exe http 8000"
+    "ngrok": "C:/utils/ngrok/ngrok.exe http 8000",
+    "test2": "node ./scripts/deployprod.js"
   }
 }

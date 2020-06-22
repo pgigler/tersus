@@ -32,7 +32,7 @@ const IndexPage = () => {
 
 	return (
 		<Layout>
-			<SEO title="Home" />
+			<SEO title="Kezdőlap" />
 			{/* Banner */}
 			<div className="text-brand-grayt">
 				<div>

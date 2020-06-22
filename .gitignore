@@ -95,3 +95,4 @@ public
 
 # TernJS port file
 .tern-port
+temp/

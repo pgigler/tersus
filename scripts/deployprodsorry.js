@@ -6,13 +6,13 @@ const chalk = require("chalk");
 const { deploy } = require("sftp-sync-deploy");
 
 const stagingDir = process.env.SSH_REMOTE_STAGING_DIR;
-const srcFolder = "./public/";
+const srcFolder = "./public_sorry/";
 const prodFolder = process.env.SSH_REMOTE_PROD_DIR;
-const tempFolder = `${stagingDir}/temp`;
+const sorryFolder = `${stagingDir}/sorry`;
 const oldFolder = `${stagingDir}/old`;
 const privateKey = fs.readFileSync(process.env.SSH_PRIVATE_KEY);
 
-runCommand(`rm -rf ${tempFolder} && mkdir -p ${tempFolder} && rsync -r ${prodFolder}/ ${tempFolder}`);
+runCommand(`rm -rf ${sorryFolder} && mkdir -p ${sorryFolder}`);
 syncAndRelease();
 
 function syncAndRelease() {
@@ -22,14 +22,14 @@ function syncAndRelease() {
 			username: process.env.SSH_USERNAME,
 			privateKey: process.env.SSH_PRIVATE_KEY,
 			localDir: srcFolder,
-			remoteDir: tempFolder,
+			remoteDir: sorryFolder,
 		},
 		{
 			dryRun: false,
 		}
 	)
 		.then(() => {
-			runCommand(`rm -rf ${oldFolder} && mv ${prodFolder} ${oldFolder} && mv ${tempFolder} ${prodFolder}`);
+			runCommand(`rm -rf ${oldFolder} && mv ${prodFolder} ${oldFolder} && mv ${sorryFolder} ${prodFolder}`);
 			console.log("Successfully deployed");
 		})
 		.catch((err) => {

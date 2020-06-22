@@ -10,7 +10,6 @@ const NotFoundPage = () => (
 			<div className="lg:w-1/2 bg-brand-blue p-4 text-white shadow-xl m-auto text-center">
 				<h1 className="text-6xl">404</h1>
 				<h2 className="text-3xl">Nagyon sajnáljuk, ez az oldal nem elérhető!</h2>
-				<p>(valahol máshol van)</p>
 			</div>
 		</div>
 	</Layout>
