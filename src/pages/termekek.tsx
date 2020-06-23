@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import products from "../data/products.json";
-import productCategories from "../data/product_categories.json";
-import { getFixed } from "../util/helper";
+import productCategories from "../../data/product_categories.json";
+import { getFixed, getProducts } from "../util/helper";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
+import Product from "../interfaces/Product";
 
 const ProductsPage = () => {
 	const data = useStaticQuery(graphql`
@@ -22,8 +22,26 @@ const ProductsPage = () => {
 					}
 				}
 			}
+			allMarkdownRemark(filter: { frontmatter: { title: { eq: "products" } } }) {
+				edges {
+					node {
+						frontmatter {
+							content {
+								code
+							}
+						}
+					}
+				}
+			}
 		}
 	`);
+
+	useEffect(() => {
+		const products = getProducts(data.allMarkdownRemark.edges[0].node);
+		setProducts(products);
+	});
+
+	const [products, setProducts] = useState<Product[]>([]);
 	return (
 		<Layout>
 			<SEO title="Termékek" />

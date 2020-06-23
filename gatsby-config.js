@@ -14,14 +14,29 @@ module.exports = {
 			resolve: `gatsby-source-filesystem`,
 			options: {
 				name: `images`,
-				path: `${__dirname}/src/images`,
+				path: `${__dirname}/assets/images`,
 			},
 		},
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
 				name: `data`,
-				path: `${__dirname}/src/data`,
+				path: `${__dirname}/data`,
+			},
+		},
+		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				name: `cms`,
+				path: `${__dirname}/cms`,
+				ignore: ["**/assets/**"],
+			},
+		},
+		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				name: `cmsimages`,
+				path: `${__dirname}/cms/assets`,
 			},
 		},
 		`gatsby-plugin-catch-links`,
@@ -51,7 +66,7 @@ module.exports = {
 				background_color: `#663399`,
 				theme_color: `#663399`,
 				display: `minimal-ui`,
-				icon: `src/images/tersus-icon.png`, // This path is relative to the root of the site.
+				icon: `assets/images/tersus-icon.png`, // This path is relative to the root of the site.
 			},
 		},
 		`gatsby-plugin-typescript`,
@@ -68,6 +83,12 @@ module.exports = {
 				develop: false, // Enable while using `gatsby develop`
 				tailwind: true, // Enable tailwindcss support
 				whitelist: ["duration-1000"],
+			},
+		},
+		{
+			resolve: "gatsby-plugin-netlify-cms",
+			options: {
+				modulePath: `${__dirname}/src/cms.js`,
 			},
 		},
 		// {

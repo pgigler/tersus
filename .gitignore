@@ -95,4 +95,7 @@ public
 
 # TernJS port file
 .tern-port
+
+# Tersus
 temp/
+.cmsgit

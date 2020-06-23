@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import Header from "./header";
 import Footer from "./footer";
-import "./main.scss";
+import "./../../assets/main.scss";
 
 const Layout = ({ children }: any) => {
 	return (

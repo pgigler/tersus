@@ -8,26 +8,31 @@
 require("ts-node").register({ files: true });
 
 exports.createPages = async ({ actions: { createPage }, graphql }) => {
-	const productItemTemplate = require.resolve(`./src/templates/product-item.tsx`);
+	const productItemTemplate = require.resolve(`./src/templates/ProductPageTemplate.tsx`);
 	const result = await graphql(`
 		query AllProductsQuery {
-			allProductsJson {
+			allMarkdownRemark(filter: { frontmatter: { title: { eq: "products" } } }) {
 				edges {
 					node {
-						id
+						frontmatter {
+							content {
+								code
+							}
+						}
 					}
 				}
 			}
 		}
 	`);
 
-	result.data.allProductsJson.edges.forEach(({ node }) => {
-		const slug = `/termekek/${node.id}`;
+	const products = JSON.parse(result.data.allMarkdownRemark.edges[0].node.frontmatter.content.code);
+	products.forEach((product) => {
+		const slug = `/termekek/${product.id}`;
 		createPage({
 			path: slug,
 			component: productItemTemplate,
 			context: {
-				productId: node.id,
+				productId: product.id,
 			},
 		});
 	});

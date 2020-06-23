@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
-import productCategories from "../data/product_categories.json";
+import productCategories from "../../data/product_categories.json";
 import { getFluid } from "../util/helper";
 import Img from "gatsby-image";
 

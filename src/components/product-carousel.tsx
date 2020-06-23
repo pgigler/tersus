@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
-import products from "../data/products.json";
 import { Link, useStaticQuery, graphql } from "gatsby";
-import { shiftRight, shiftLeft, getFluid } from "../util/helper";
+import { shiftRight, shiftLeft, getFluid, getProducts } from "../util/helper";
 import Img from "gatsby-image";
 import { useWindowSize } from "../util/customhooks";
+import Product from "../interfaces/Product";
 
 const productComparer = (p1: any, p2: any) => {
 	const pop1 = parseInt(p1.popular, 10);
 	const pop2 = parseInt(p2.popular, 10);
 	return pop1 - pop2;
 };
-
-products.sort(productComparer);
-const initialProducts = shiftRight(products);
 
 const transitionDuration = 400;
 
@@ -21,7 +18,7 @@ const transitionDuration = 400;
 type Direction = "prev" | "next";
 type TransitionState = "start" | "animating" | "none";
 
-const ProductCarousel = (props: { count: number }) => {
+const ProductCarousel = ({ count }: { count: number }) => {
 	const data = useStaticQuery(graphql`
 		query ProductCarouselQuery {
 			allFile(filter: { extension: { regex: "/(jpg)|(png)|(jpeg)/" }, relativeDirectory: { eq: "products" } }) {
@@ -36,11 +33,28 @@ const ProductCarousel = (props: { count: number }) => {
 					}
 				}
 			}
+			allMarkdownRemark(filter: { frontmatter: { title: { eq: "products" } } }) {
+				edges {
+					node {
+						frontmatter {
+							content {
+								code
+							}
+						}
+					}
+				}
+			}
 		}
 	`);
 
+	useEffect(() => {
+		const products = getProducts(data.allMarkdownRemark.edges[0].node);
+		products.sort(productComparer);
+		setProducts(shiftRight(products));
+	}, []);
+
 	const [width] = useWindowSize();
-	const [itemList, setItemList] = useState(initialProducts);
+	const [products, setProducts] = useState<Product[]>([]);
 	const [transitionState, setTransitionState] = useState<TransitionState>("none");
 	const [direction, setDirection] = useState<Direction>("prev");
 	const [touchCarouselStart, setTouchCarouselStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -71,7 +85,7 @@ const ProductCarousel = (props: { count: number }) => {
 		} else if (getCarouselWindowWidth() < 640) {
 			return 2;
 		} else {
-			return props.count;
+			return count;
 		}
 	};
 
@@ -107,7 +121,7 @@ const ProductCarousel = (props: { count: number }) => {
 
 	const prev = () => {
 		if (transitionState === "none") {
-			setItemList(shiftRight(itemList));
+			setProducts(shiftRight(products));
 			setDirection("prev");
 			setTransitionState("start");
 		}
@@ -115,7 +129,7 @@ const ProductCarousel = (props: { count: number }) => {
 
 	const next = () => {
 		if (transitionState === "none") {
-			setItemList(shiftLeft(itemList));
+			setProducts(shiftLeft(products));
 			setDirection("next");
 			setTransitionState("start");
 		}
@@ -157,7 +171,7 @@ const ProductCarousel = (props: { count: number }) => {
 				>
 					<div className="relative overflow-x-hidden" style={{ width: `${getCarouselWindowWidth()}px` }}>
 						<div className=" flex" style={{ width: `5000px` }}>
-							{itemList.map((product, i) => (
+							{products.map((product, i) => (
 								<div key={i} className="p-4 relative" style={getItemStyle()}>
 									<Link to={`/termekek/${product.id}`}>
 										<div className="flex justify-around">

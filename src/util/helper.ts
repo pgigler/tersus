@@ -1,3 +1,5 @@
+import Product from "../interfaces/Product";
+
 export const getFluid = (images: any, relativePath: string) => {
 	return images.filter((image) => image.node.relativePath === relativePath)[0].node.childImageSharp.fluid;
 };
@@ -12,4 +14,18 @@ export const shiftRight = (list: any) => {
 
 export const shiftLeft = (list: any) => {
 	return [...list.slice(1), list[0]];
+};
+
+export const getImageUrlFromAsset = (getAsset: (...args: any[]) => any, assetName: string) => {
+	if (getAsset) {
+		const globalAssetName = assetName.replace(/\//, "-slash-");
+		return getAsset(globalAssetName);
+	} else {
+		return "image not found";
+	}
+};
+
+export const getProducts = (node: any): Product[] => {
+	const json = node.frontmatter.content.code;
+	return JSON.parse(json);
 };
