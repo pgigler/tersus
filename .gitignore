@@ -99,3 +99,4 @@ public
 # Tersus
 temp/
 .cmsgit
+public_sorry/*.php

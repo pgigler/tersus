@@ -12,42 +12,59 @@ const sorryFolder = `${stagingDir}/sorry`;
 const oldFolder = `${stagingDir}/old`;
 const privateKey = fs.readFileSync(process.env.SSH_PRIVATE_KEY);
 
-runCommand(`rm -rf ${sorryFolder} && mkdir -p ${sorryFolder}`);
-syncAndRelease();
-
-function syncAndRelease() {
-	deploy(
-		{
-			host: process.env.SSH_HOST,
-			username: process.env.SSH_USERNAME,
-			privateKey: process.env.SSH_PRIVATE_KEY,
-			localDir: srcFolder,
-			remoteDir: sorryFolder,
-		},
-		{
-			dryRun: false,
-		}
-	)
-		.then(() => {
-			runCommand(`rm -rf ${oldFolder} && mv ${prodFolder} ${oldFolder} && mv ${sorryFolder} ${prodFolder}`);
-			console.log("Successfully deployed");
-		})
-		.catch((err) => {
-			console.log(chalk.red(err));
-		});
+async function run() {
+	try {
+		await runCommand(`rm -rf ${sorryFolder} && mkdir -p ${sorryFolder}`);
+		await syncAndRelease();
+        await runCommand(`rm -rf ${oldFolder} && mv ${prodFolder} ${oldFolder} && mv ${sorryFolder} ${prodFolder}`);
+		await runCommand(`cp /web/tersus_config.php /web/tersus.hu`);
+		console.log("Successfully deployed");
+	} catch (err) {
+		console.log(chalk.red(err));
+	}
+}
+async function syncAndRelease() {
+	return new Promise((resolve, reject) => {
+		deploy(
+			{
+				host: process.env.SSH_HOST,
+				username: process.env.SSH_USERNAME,
+				privateKey: process.env.SSH_PRIVATE_KEY,
+				localDir: srcFolder,
+				remoteDir: sorryFolder,
+			},
+			{
+				dryRun: false,
+			}
+		)
+			.then(() => {
+				resolve();
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
 }
 
-function runCommand(command) {
-	exec(
-		command,
-		{
-			host: process.env.SSH_HOST,
-			user: process.env.SSH_USERNAME,
-			key: privateKey,
-		},
-		function (_err, stdout, stderr) {
-			console.log(stdout);
-			console.log(chalk.red(stderr));
-		}
-	);
+async function runCommand(command) {
+	return new Promise((resolve, reject) => {
+		exec(
+			command,
+			{
+				host: process.env.SSH_HOST,
+				user: process.env.SSH_USERNAME,
+				key: privateKey,
+			},
+			function (_err, stdout, stderr) {
+				if (stderr) {
+					reject(stderr);
+				} else {
+					console.log(stdout);
+					resolve();
+				}
+			}
+		);
+	});
 }
+
+run();
