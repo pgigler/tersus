@@ -15,6 +15,9 @@
 	"[json]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
+	"[php]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 	"editor.formatOnPaste": false,
 	"editor.formatOnSave": true,
 	"editor.detectIndentation": false,

@@ -100,3 +100,4 @@ public
 temp/
 .cmsgit
 public_sorry/*.php
+php/tersus_config.php
