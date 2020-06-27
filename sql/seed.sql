@@ -1,14 +1,11 @@
-DROP TABLE orders;
+DELETE FROM products;
+DELETE FROM partners;
+DELETE FROM orders;
+DELETE FROM order_items;
+DELETE FROM order_log;
 
-CREATE TABLE orders(
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    sku VARCHAR(100) NOT NULL,
-    product_name VARCHAR(100) NOT NULL,
-    order_status CHAR(1) NOT NULL,
-    created_date DATETIME NOT NULL,
-    creator VARCHAR(100) NOT NULL,
-    updated_date DATETIME,
-    updater VARCHAR(100)
-) AUTO_INCREMENT = 11512
+INSERT INTO partners (code, name) VALUES ('TER', 'Tersus');
 
-INSERT INTO orders (sku, product_name, order_status, created_date, creator) VALUES ('p123', 'klor', 'P', '2020-06-26 11:22:00', 'bela');
+INSERT INTO products (sku, title, price, currency, category, brand, stock, weight) VALUES ('st_klor_1', 'Stabil Klór', 5600, 'HUF', 'KLOR', 'Dinax', NULL, 12.4);
+INSERT INTO products (sku, title, price, currency, category, brand, stock, weight) VALUES ('al_sokk_p', 'Alga Sokk P', 2300, 'HUF', 'KLOR', 'Dinax', NULL, 5.4);
+
