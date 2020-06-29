@@ -65,7 +65,7 @@ const Header = () => {
 						</a>
 					</div>
 				</div>
-				<div className="text-4xl uppercase font-semibold tracking-wide font-sans">
+				<div className="text-4xl font-semibold tracking-wide font-sans">
 					<Link to="/">Tersus</Link>
 				</div>
 				<div className="md:block"></div>
