@@ -68,17 +68,20 @@
     "build": "gatsby build",
     "rebuild": "npm run clean && npm run build",
     "dev": "gatsby develop",
+    "dev:php": "php -S localhost:7474 -t ./php",
     "_deploy:uat:build": "gatsby clean && gatsby build --prefix-paths",
     "deploy:uat": "npm run _deploy:uat:build && node ./scripts/deployuat.js && npm run clean",
-    "_deploy:prod:build": "gatsby clean && gatsby build && cpx php/api/** public/api",
+    "_deploy:prod:preparephp": "cpx php/api/** public/api && cpx php/vendor/**/*.php public/vendor",
+    "_deploy:prod:build": "gatsby clean && gatsby build && npm run _deploy:prod:preparephp",
     "deploy:prod": "npm run _deploy:prod:build && node ./scripts/deploy-prod.js && npm run clean",
-    "deploy:prod:sorry": "cpx php/api/** public_sorry/api && node ./scripts/deploy-prod-sorry.js",
-    "deploy:prod:backend": "node ./scripts/deploy-prod-backend.js",
+    "deploy:prod:sorry": "node ./scripts/deploy-prod-sorry.js",
+    "deploy:prod:backend": "npm run _deploy:prod:preparephp && node ./scripts/deploy-prod-backend.js",
     "cms:pull": "node ./scripts/cms-pull.js",
     "format": "prettier --write \"**/*.{js,tsx,jsx,json,md}\"",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "ngrok": "C:/utils/ngrok/ngrok.exe http 8000",
-    "test2": "node ./scripts/deployprod.js"
+    "test2": "node ./scripts/deployprod.js",
+    "tail": "powershell.exe Get-Content -Path 'C:/Windows/Temp/PHP74x64_errors.log' -Wait"
   }
 }

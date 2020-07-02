@@ -1,12 +1,14 @@
 <?php declare(strict_types=1);
 
+require_once '../tersus_config.php';
+require './../vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once '../tersus_config.php';
-require './lib/Exception.php';
-require './lib/PHPMailer.php';
-require './lib/SMTP.php';
+// require './../vendor/phpmailer/phpmailer/src/Exception.php';
+// require './../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+// require './../vendor/phpmailer/phpmailer/src/SMTP.php';
 
 $mail = new PHPMailer();
 $mail->IsSMTP(); // Send via SMTP

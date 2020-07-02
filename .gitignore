@@ -101,3 +101,4 @@ temp/
 .cmsgit
 public_sorry/*.php
 php/tersus_config.php
+/php/vendor/
