@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import { getFluid } from "../util/helper";
+import { getFluid, isBrowser } from "../util/helper";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 
@@ -177,7 +177,7 @@ const ChemicalsHandling = () => (
 
 const UsefulInfoPage = () => {
 	let hash = "";
-	if (typeof window !== "undefined") {
+	if (isBrowser()) {
 		hash = window.location.hash;
 	}
 

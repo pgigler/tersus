@@ -1,11 +1,13 @@
 <?php declare(strict_types=1);
 require_once '../tersus_config.php';
 
+$tablePrefix = ENV == "uat" ? "uat_" : "prod_";
+
 header('Content-Type: application/json; charset=utf-8');
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-$sql = "SELECT * FROM `orders` WHERE 1";
+$sql = "SELECT * FROM`${tablePrefix}orders` WHERE 1";
 $result = $conn->query($sql);
 $arr = [];
 

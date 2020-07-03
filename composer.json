@@ -1,12 +1,13 @@
 {
-    "name": "pgigler/tersus",
-    "type": "project",
+	"name": "pgigler/tersus",
+	"type": "project",
 	"config": {
-        "vendor-dir": "php/vendor"
-    },
-    "require": {
-        "google/auth": "^1.9",
-        "phpmailer/phpmailer": "^6.1"
-    },
-    "authors": []
+		"vendor-dir": "php/vendor"
+	},
+	"require": {
+		"phpmailer/phpmailer": "^6.1",
+		"google/auth": "^1.9",
+		"phpseclib/phpseclib": "~2.0"
+	},
+	"authors": []
 }

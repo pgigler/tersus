@@ -21,6 +21,13 @@
 		}
 	}
 
+	&.btn-small {
+		@apply text-white bg-brand-blue uppercase whitespace-no-wrap text-xl duration-500 px-2;
+		&:hover {
+			@apply bg-white text-brand-blue duration-500;
+		}
+	}
+
 	&.toggled {
 		@apply bg-white text-brand-blue uppercase whitespace-no-wrap text-xl duration-500;
 	}

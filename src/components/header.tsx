@@ -1,5 +1,6 @@
 import { Link, useStaticQuery, graphql } from "gatsby";
 import React, { useState } from "react";
+import { isBrowser } from "../util/helper";
 
 interface Menu {
 	title: string;
@@ -9,14 +10,14 @@ interface Menu {
 const MENUS: Menu[] = [
 	{ title: "Kezdőlap", slug: "/" },
 	{ title: "Termékek", slug: "/termekek" },
-	{ title: "Hasznos infók", slug: "/hasznos-infok#medence_vizkezelese " },
+	{ title: "Hasznos infók", slug: "/hasznos-infok#medence_vizkezelese" },
 	{ title: "Rólunk", slug: "/rolunk" },
 	{ title: "Kapcsolat", slug: "/#kapcsolat" },
 ];
 
 const Header = () => {
 	let path = "";
-	if (typeof window !== "undefined") {
+	if (isBrowser()) {
 		path = window.location.pathname;
 	}
 	const [menuVisible, setMenuVisible] = useState(false);

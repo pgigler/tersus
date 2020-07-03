@@ -5,7 +5,7 @@ const fs = require("fs");
 
 const privateKey = fs.readFileSync(process.env.SSH_PRIVATE_KEY);
 
-async function runCommand(command) {
+async function runCommand(command, logOutput = true) {
 	return new Promise((resolve, reject) => {
 		exec(
 			command,
@@ -18,7 +18,9 @@ async function runCommand(command) {
 				if (stderr) {
 					reject(stderr);
 				} else {
-					console.log(stdout);
+					if (logOutput) {
+						console.log(stdout);
+					}
 					resolve();
 				}
 			}

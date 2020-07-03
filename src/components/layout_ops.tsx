@@ -1,13 +1,13 @@
 import React from "react";
 
-import Header from "./header";
 import Footer from "./footer";
 import "./../../assets/main.scss";
+import HeaderOps from "./ops/header_ops";
 
-const Layout = ({ children }: any) => {
+const LayoutOps = ({ children }: any) => {
 	return (
 		<>
-			<Header />
+			<HeaderOps />
 			<div>
 				<main>{children}</main>
 				{process.env.NODE_ENV === "development" ? (
@@ -27,4 +27,4 @@ const Layout = ({ children }: any) => {
 	);
 };
 
-export default Layout;
+export default LayoutOps;

@@ -1,18 +1,18 @@
-DROP TABLE IF EXISTS order_log;
-DROP TABLE IF EXISTS order_items;
-DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS customers;
-DROP TABLE IF EXISTS products;
-DROP TABLE IF EXISTS partners;
+DROP TABLE IF EXISTS uat_order_log;
+DROP TABLE IF EXISTS uat_order_items;
+DROP TABLE IF EXISTS uat_orders;
+DROP TABLE IF EXISTS uat_customers;
+DROP TABLE IF EXISTS uat_products;
+DROP TABLE IF EXISTS uat_partners;
 
-CREATE TABLE partners(
+CREATE TABLE uat_partners(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     code VARCHAR(20),
     name VARCHAR(100),
     UNIQUE KEY `u_code` (code)
 );
 
-CREATE TABLE products(
+CREATE TABLE uat_products(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     partner_code VARCHAR(20),
     sku VARCHAR(100) NOT NULL,
@@ -25,11 +25,11 @@ CREATE TABLE products(
     weight DECIMAL(10,3), -- in KG
     INDEX partner_ind (partner_code),
     FOREIGN KEY (partner_code)
-        REFERENCES partners(code)
+        REFERENCES uat_partners(code)
         ON DELETE CASCADE
 );
 
-CREATE TABLE customers(
+CREATE TABLE uat_customers(
     email VARCHAR(250) NOT NULL,
     partner_code VARCHAR(20) NOT NULL,
     newsletter CHAR(1) NOT NULL, -- T, F
@@ -46,11 +46,11 @@ CREATE TABLE customers(
     registration_date DATETIME,
     UNIQUE KEY `u_email_partner` (email, partner_code),
     FOREIGN KEY (partner_code)
-        REFERENCES partners(code)
+        REFERENCES uat_partners(code)
         ON DELETE CASCADE
 );
 
-CREATE TABLE orders(
+CREATE TABLE uat_orders(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     partner_code VARCHAR(20),
     customer_email VARCHAR(250),
@@ -69,11 +69,11 @@ CREATE TABLE orders(
     updater VARCHAR(100),
     INDEX partner_customer_ind (partner_code, customer_email),
     FOREIGN KEY (partner_code, customer_email)
-        REFERENCES customers(partner_code, email)
+        REFERENCES uat_customers(partner_code, email)
         ON DELETE CASCADE
 ) AUTO_INCREMENT = 11512;
 
-CREATE TABLE order_items(
+CREATE TABLE uat_order_items(
     order_id INT,
     position INT,
     sku VARCHAR(100) NOT NULL,
@@ -82,11 +82,11 @@ CREATE TABLE order_items(
     quantity INT,
     INDEX order_ind (order_id),
     FOREIGN KEY (order_id)
-        REFERENCES orders(id)
+        REFERENCES uat_orders(id)
         ON DELETE CASCADE
 );
 
-CREATE TABLE order_log(
+CREATE TABLE uat_order_log(
     timestamp TIMESTAMP NOT NULL,
     author VARCHAR(100) NOT NULL,
     type CHAR(100) NOT NULL, -- CREATED, ...
@@ -94,7 +94,7 @@ CREATE TABLE order_log(
     order_id INT,
     INDEX order_ind (order_id),
     FOREIGN KEY (order_id)
-        REFERENCES orders(id)
+        REFERENCES uat_orders(id)
         ON DELETE CASCADE
 );
 

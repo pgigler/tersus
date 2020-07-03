@@ -1,11 +1,17 @@
 <?php declare(strict_types=1);
 require_once '../tersus_config.php';
+require 'auth.php';
+
+$email = \Tersus\Auth\authenticate();
+
+$isUAT = ENV == "uat";
+$tablePrefix = $isUAT ? "uat_" : "prod_";
 
 header('Content-Type: application/json; charset=utf-8');
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-$sql = "SELECT * FROM `products` WHERE 1";
+$sql = "SELECT * FROM `${tablePrefix}products` WHERE 1";
 $result = $conn->query($sql);
 $arr = [];
 

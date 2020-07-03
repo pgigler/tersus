@@ -29,3 +29,18 @@ export const getProducts = (node: any): Product[] => {
 	const json = node.frontmatter.content.code;
 	return JSON.parse(json);
 };
+
+export const isBrowser = () => typeof window !== "undefined";
+
+export const withErrorHandling = (callback: () => Promise<void> | void, errorHandler: (error: any) => void) => {
+	try {
+		const result = callback();
+		if (result instanceof Promise) {
+			result.catch(async (error) => {
+				errorHandler(error);
+			});
+		}
+	} catch (error) {
+		errorHandler(error);
+	}
+};

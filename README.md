@@ -19,6 +19,12 @@
 npm run setup
 ```
 
+## Setup cert
+
+1. Init/Renew cert
+    - <code>npm run createcert</code> (creates self-signed certs if not exists, for renewal, just delete them and recreate)
+    - tersus.dev.crt must be imported into User Certificates/Trusted Root Certification Authorities/Certificates (Action/All tasks/Import... select tersus.dev.crt)
+
 # Start
 
 ```

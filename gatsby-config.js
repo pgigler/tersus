@@ -1,5 +1,17 @@
 require("ts-node").register({ files: true });
 
+// const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
+// // eslint-disable-next-line no-console
+// console.log(`Using environment config: '${activeEnv}'`);
+
+// require("dotenv").config({
+// 	path: `.env`,
+// });
+
+require("dotenv").config({
+	path: `.env.${process.env.NODE_ENV === "development" ? "uat" : "prod"}`,
+});
+
 module.exports = {
 	siteMetadata: {
 		title: `AQSZTID | Medencetisztítás`,
@@ -89,6 +101,33 @@ module.exports = {
 			resolve: "gatsby-plugin-netlify-cms",
 			options: {
 				modulePath: `${__dirname}/src/cms.js`,
+			},
+		},
+		{
+			resolve: `gatsby-plugin-google-gtag`,
+			options: {
+				// You can add multiple tracking ids and a pageview event will be fired for all of them.
+				trackingIds: [
+					process.env.GA_TRACKING_ID, // Google Analytics / GA
+					// "AW-CONVERSION_ID", // Google Ads / Adwords / AW
+					// "DC-FLOODIGHT_ID", // Marketing Platform advertising products (Display & Video 360, Search Ads 360, and Campaign Manager)
+				],
+				// This object gets passed directly to the gtag config command
+				// This config will be shared across all trackingIds
+				gtagConfig: {
+					// optimize_id: "OPT_CONTAINER_ID",
+					anonymize_ip: true,
+					cookie_expires: 0,
+				},
+				// This object is used for configuration specific to this plugin
+				pluginConfig: {
+					// Puts tracking script in the head instead of the body
+					head: false,
+					// Setting this parameter is also optional
+					respectDNT: true,
+					// Avoids sending pageview hits from custom paths
+					// exclude: ["/preview/**", "/do-not-track/me/too/"],
+				},
 			},
 		},
 		// {
