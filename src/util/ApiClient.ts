@@ -13,7 +13,7 @@ export class ApiClient {
 		const user = getCurrentUser();
 		const requestInit = { headers: {} as any, signal: this.abortController.signal };
 		if (user) {
-			requestInit.headers.Authorization = `Bearer ${user.id_token}`;
+			requestInit.headers["X-Authorization"] = `Bearer ${user.id_token}`;
 		}
 		const resp = await fetch(`${apiUrl}${path}`, requestInit);
 		if (resp.status === 401) {

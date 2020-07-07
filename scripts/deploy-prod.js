@@ -18,7 +18,7 @@ async function run() {
 			`rm -rf ${remoteTempFolder} && mkdir -p ${remoteTempFolder} && rsync -r ${remoteProdFolder}/ ${remoteTempFolder}`
 		);
 		await sync(localSrcFolder, remoteTempFolder, { forceUpload: true });
-		await syncBackendFull(remotePhpTempFolder, remoteTempFolder, process.env.ENV);
+		await syncBackendFull(remotePhpTempFolder, remoteTempFolder, "prod");
 		await runCommand(
 			`rm -rf ${remoteOldFolder} && mv ${remoteProdFolder} ${remoteOldFolder} && mv ${remoteTempFolder} ${remoteProdFolder}`
 		);

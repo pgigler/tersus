@@ -9,7 +9,7 @@ require("ts-node").register({ files: true });
 // });
 
 require("dotenv").config({
-	path: `.env.${process.env.NODE_ENV === "development" ? "uat" : "prod"}`,
+	path: `.env${process.env.ENV !== undefined ? `.${process.env.ENV}` : ""}`,
 });
 
 module.exports = {
@@ -95,6 +95,7 @@ module.exports = {
 				develop: false, // Enable while using `gatsby develop`
 				tailwind: true, // Enable tailwindcss support
 				whitelist: ["duration-1000"],
+				whitelistPatterns: [/^notification/],
 			},
 		},
 		{
@@ -104,30 +105,39 @@ module.exports = {
 			},
 		},
 		{
-			resolve: `gatsby-plugin-google-gtag`,
+			resolve: `gatsby-plugin-create-client-paths`,
+			options: { prefixes: [`/ops/*`] },
+		},
+		{
+			resolve: "gatsby-plugin-google-tagmanager",
 			options: {
-				// You can add multiple tracking ids and a pageview event will be fired for all of them.
-				trackingIds: [
-					process.env.GA_TRACKING_ID, // Google Analytics / GA
-					// "AW-CONVERSION_ID", // Google Ads / Adwords / AW
-					// "DC-FLOODIGHT_ID", // Marketing Platform advertising products (Display & Video 360, Search Ads 360, and Campaign Manager)
-				],
-				// This object gets passed directly to the gtag config command
-				// This config will be shared across all trackingIds
-				gtagConfig: {
-					// optimize_id: "OPT_CONTAINER_ID",
-					anonymize_ip: true,
-					cookie_expires: 0,
+				id: process.env.GTM_ID,
+
+				// Include GTM in development.
+				//
+				// Defaults to false meaning GTM will only be loaded in production.
+				includeInDevelopment: process.env.GTM_DEV_MODE && process.env.GTM_DEV_MODE === "true",
+
+				// datalayer to be set before GTM is loaded
+				// should be an object or a function that is executed in the browser
+				//
+				// eslint-disable-next-line object-shorthand
+				defaultDataLayer: function () {
+					return {
+						pageType: window.pageType,
+					};
 				},
-				// This object is used for configuration specific to this plugin
-				pluginConfig: {
-					// Puts tracking script in the head instead of the body
-					head: false,
-					// Setting this parameter is also optional
-					respectDNT: true,
-					// Avoids sending pageview hits from custom paths
-					// exclude: ["/preview/**", "/do-not-track/me/too/"],
-				},
+
+				// Specify optional GTM environment details.
+				// gtmAuth: "YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_AUTH_STRING",
+				// gtmPreview: "YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_PREVIEW_NAME",
+				// dataLayerName: "YOUR_DATA_LAYER_NAME",
+
+				// Name of the event that is triggered
+				// on every Gatsby route change.
+				//
+				// Defaults to gatsby-route-change
+				// routeChangeEventName: "YOUR_ROUTE_CHANGE_EVENT_NAME",
 			},
 		},
 		// {

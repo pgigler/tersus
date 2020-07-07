@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link, navigate } from "@reach/router";
 import { isLoggedIn, logout, getCurrentUser } from "../../util/auth";
 import { isBrowser } from "../../util/helper";
+import { Link, navigate, withPrefix } from "gatsby";
 
 interface Menu {
 	title: string;
@@ -27,7 +27,7 @@ const HeaderOps = () => {
 			{isLoggedIn() ? (
 				<div>
 					<a
-						href="/"
+						href="#"
 						onClick={(event) => {
 							event.preventDefault();
 							logout(() => navigate(`/ops/login`));
@@ -95,7 +95,7 @@ const HeaderOps = () => {
 					{MENUS.map((item) => (
 						<a
 							key={item.slug}
-							href={item.slug}
+							href={withPrefix(item.slug)}
 							onClick={(event) => {
 								event.preventDefault();
 								setMenuVisible(false);

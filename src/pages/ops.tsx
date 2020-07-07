@@ -8,10 +8,11 @@ import Profile from "../components/ops/profile";
 import Products from "../components/ops/products";
 import Orders from "../components/ops/orders";
 import Customers from "../components/ops/customers";
+import { isBrowser } from "../util/helper";
 
 const Ops = () => (
 	<LayoutOps>
-		<Router>
+		<Router basepath={isBrowser() ? __PATH_PREFIX__ : ""}>
 			<PrivateRoute path="/ops" component={Home} />
 			<PrivateRoute path="/ops/termekek" component={Products} />
 			<PrivateRoute path="/ops/rendelesek" component={Orders} />

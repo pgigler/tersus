@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,900");
+
+@import "notifications";
+
 @tailwind base;
 
 @tailwind components;
@@ -58,7 +62,6 @@
 }
 
 main {
-	font-family: calibri;
 	position: relative;
 	min-height: calc(100vh - 265px);
 }

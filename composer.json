@@ -1,5 +1,6 @@
 {
 	"name": "pgigler/tersus",
+	"description": "Tersus",
 	"type": "project",
 	"config": {
 		"vendor-dir": "php/vendor"
