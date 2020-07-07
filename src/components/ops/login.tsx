@@ -5,8 +5,6 @@ import GoogleLogin from "react-google-login";
 
 class Login extends React.Component<{ path: string }, {}> {
 	responseGoogle(response) {
-		// eslint-disable-next-line no-console
-		console.log(JSON.stringify(response));
 		if (response.profileObj && response.tokenObj) {
 			handleLogin({
 				name: response.profileObj.name,
@@ -14,7 +12,7 @@ class Login extends React.Component<{ path: string }, {}> {
 				givenName: response.profileObj.givenName,
 				familyName: response.profileObj.familyName,
 				id_token: response.tokenObj.id_token,
-				expires_at: new Date(response.tokenObj.expires_at),
+				expires_at: response.tokenObj.expires_at,
 			});
 		}
 	}

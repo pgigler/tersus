@@ -19,3 +19,6 @@ if (!certExistOnLocation) {
 	// eslint-disable-next-line no-console
 	console.log(`Certificates exists in ${CERT_LOCATION} -> skip`);
 }
+
+// Create PFX
+// "c:\Program Files\Git\usr\bin\openssl.exe" pkcs12 -export -out c:\Projects\my\tersus\tersus.dev.pfx -inkey c:\Projects\my\tersus\tersus.dev.key -in c:\Projects\my\tersus\tersus.dev.crt

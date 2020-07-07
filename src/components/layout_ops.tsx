@@ -2,7 +2,8 @@ import React from "react";
 
 import Footer from "./footer";
 import "./../../assets/main.scss";
-import HeaderOps from "./ops/header_ops";
+
+import Loadable from "@loadable/component";
 
 const LayoutOps = ({ children }: any) => {
 	return (
@@ -26,5 +27,7 @@ const LayoutOps = ({ children }: any) => {
 		</>
 	);
 };
+
+const HeaderOps = Loadable(() => import("./ops/header_ops"));
 
 export default LayoutOps;

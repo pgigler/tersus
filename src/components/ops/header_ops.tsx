@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { isLoggedIn, logout, getCurrentUser } from "../../util/auth";
+import { logout, getCurrentUser } from "../../util/auth";
 import { isBrowser } from "../../util/helper";
 import { Link, navigate, withPrefix } from "gatsby";
 
@@ -21,10 +21,13 @@ const HeaderOps = () => {
 		path = window.location.pathname;
 	}
 	const user = getCurrentUser();
+	const isLoggedIn = user !== undefined;
+
+	const [menuVisible, setMenuVisible] = useState(false);
 
 	const loginLogout = (
 		<div className="m-2 btn btn-small">
-			{isLoggedIn() ? (
+			{isLoggedIn ? (
 				<div>
 					<a
 						href="#"
@@ -44,7 +47,38 @@ const HeaderOps = () => {
 		</div>
 	);
 
-	const [menuVisible, setMenuVisible] = useState(false);
+	const nav = (
+		<nav
+			className={`${
+				menuVisible ? "block md:flex" : "hidden md:flex"
+			} md:h-full relative bg-white md:bg-transparent md:pb-0 z-10`}
+		>
+			{MENUS.map((item) => (
+				<a
+					key={item.slug}
+					href={withPrefix(item.slug)}
+					onClick={(event) => {
+						event.preventDefault();
+						setMenuVisible(false);
+						navigate(item.slug);
+					}}
+					className={`${
+						isLoggedIn ? "block" : "hidden"
+					} menu relative whitespace-no-wrap py-4 pl-2 md:py-0 md:pl-0 flex items-center ${
+						(item.slug === "/" && (path === "/" || path === "/tersus/")) ||
+						(item.slug !== "/" && path.indexOf(item.slug) > -1)
+							? "active"
+							: ""
+					}`}
+				>
+					<h1 className="uppercase font-medium text-brand-grayt md:mx-2 z-20">{item.title}</h1>
+					<div className="absolute bottom-0 left-0 w-full h-0"></div>
+				</a>
+			))}
+
+			<div className="hidden md:block">{loginLogout}</div>
+		</nav>
+	);
 
 	return (
 		<div>
@@ -62,7 +96,7 @@ const HeaderOps = () => {
 							type="button"
 							className="block text-gray-600 focus:outline-none"
 						>
-							<div className={isLoggedIn() ? "block" : "hidden"}>
+							<div className={isLoggedIn ? "block" : "hidden"}>
 								<div className={menuVisible ? "block" : "hidden"}>
 									<svg
 										className="h-4 w-4 fill-current hover:text-brand-blue"
@@ -87,35 +121,7 @@ const HeaderOps = () => {
 						</button>
 					</div>
 				</div>
-				<nav
-					className={`${
-						menuVisible ? "block" : "hidden"
-					} md:flex md:h-full relative bg-white md:bg-transparent md:pb-0 z-10`}
-				>
-					{MENUS.map((item) => (
-						<a
-							key={item.slug}
-							href={withPrefix(item.slug)}
-							onClick={(event) => {
-								event.preventDefault();
-								setMenuVisible(false);
-								navigate(item.slug);
-							}}
-							className={`${
-								isLoggedIn() ? "block" : "hidden"
-							} menu relative whitespace-no-wrap py-4 pl-2 md:py-0 md:pl-0 flex items-center ${
-								(item.slug === "/" && (path === "/" || path === "/tersus/")) ||
-								(item.slug !== "/" && path.indexOf(item.slug) > -1)
-									? "active"
-									: ""
-							}`}
-						>
-							<h1 className="uppercase font-medium text-brand-grayt md:mx-2 z-20">{item.title}</h1>
-							<div className="absolute bottom-0 left-0 w-full h-0"></div>
-						</a>
-					))}
-					<div className="hidden md:block">{loginLogout}</div>
-				</nav>
+				{nav}
 			</header>
 		</div>
 	);

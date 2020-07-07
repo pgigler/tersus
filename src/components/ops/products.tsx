@@ -21,7 +21,6 @@ const Products = () => {
 				setLoading(true);
 				const result = await client.fetch("/api/products.php");
 				setProducts(result);
-				NotificationManager.info("Products loaded");
 				setLoading(false);
 			},
 			() => {

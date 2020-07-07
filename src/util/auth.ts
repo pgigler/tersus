@@ -2,12 +2,16 @@ import { navigate } from "gatsby";
 
 const isBrowser = typeof window !== `undefined`;
 
+const removeUser = () => {
+	window.localStorage.removeItem("googleUser");
+};
+
 const getUser = (): LoggedInUser | undefined => {
 	const user: LoggedInUser | undefined = window.localStorage.googleUser
 		? JSON.parse(window.localStorage.googleUser)
 		: undefined;
 	if (user !== undefined) {
-		if (user.expires_at < new Date()) {
+		if (user.expires_at < new Date().getTime()) {
 			removeUser();
 			return undefined;
 		}
@@ -22,15 +26,11 @@ export interface LoggedInUser {
 	givenName: string;
 	familyName: string;
 	id_token: string;
-	expires_at: Date;
+	expires_at: number;
 }
 
 const setUser = (user?: LoggedInUser) => {
 	window.localStorage.googleUser = JSON.stringify(user);
-};
-
-const removeUser = () => {
-	window.localStorage.removeItem("googleUser");
 };
 
 export const handleLogin = (user: LoggedInUser) => {
