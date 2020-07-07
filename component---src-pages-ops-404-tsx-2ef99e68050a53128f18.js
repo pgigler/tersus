@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[10],{jm7Z:function(e,n,t){"use strict";t.r(n);var a=t("q1tI"),c=t.n(a),r=t("9Dj+"),u=t("H8eV");n.default=function(){return c.a.createElement(r.a,null,c.a.createElement(u.a,{title:"OPS"}))}}}]);
+//# sourceMappingURL=component---src-pages-ops-404-tsx-2ef99e68050a53128f18.js.map

@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./src/pages/ops/404.tsx"],"names":["NotFoundPageOps"],"mappings":"4FAEA,OAEeA,UAFS,kBAAM","file":"component---src-pages-ops-404-tsx-7209e28c8fad48afc493.js","sourcesContent":["import React from \"react\";\n\nconst NotFoundPageOps = () => 404;\n\nexport default NotFoundPageOps;\n"],"sourceRoot":""}
