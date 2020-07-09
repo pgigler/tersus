@@ -32,7 +32,7 @@ export const getProducts = (node: any): Product[] => {
 
 export const isBrowser = () => typeof window !== "undefined";
 
-export const withErrorHandling = (callback: () => Promise<void> | void, errorHandler: (error: any) => void) => {
+export const withErrorHandling = (callback: () => Promise<void> | void, errorHandler: (error: Error) => void) => {
 	try {
 		const result = callback();
 		if (result instanceof Promise) {

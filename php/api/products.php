@@ -1,4 +1,6 @@
 <?php declare(strict_types=1);
+http_response_code(500);
+
 require_once '../tersus_config.php';
 require 'auth.php';
 
@@ -10,6 +12,11 @@ $tablePrefix = $isUAT ? "uat_" : "prod_";
 header('Content-Type: application/json; charset=utf-8');
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+if ($conn->connect_errno) {
+	printf("MySQL connection failed: %s\n", $conn->connect_error);
+	exit();
+}
 
 $sql = "SELECT * FROM `${tablePrefix}products` WHERE 1";
 $result = $conn->query($sql);
@@ -25,5 +32,7 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
+
+header('HTTP/1.1 200 OK');
 
 ?>

@@ -23,8 +23,8 @@ const Products = () => {
 				setProducts(result);
 				setLoading(false);
 			},
-			() => {
-				NotificationManager.error("Authentication failed");
+			(error: Error) => {
+				NotificationManager.error(error.message);
 				setLoading(false);
 			}
 		);

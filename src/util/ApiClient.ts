@@ -16,10 +16,21 @@ export class ApiClient {
 			requestInit.headers["X-Authorization"] = `Bearer ${user.id_token}`;
 		}
 		const resp = await fetch(`${apiUrl}${path}`, requestInit);
-		if (resp.status === 401) {
-			throw Error("Authentication failed");
+		if (resp.status < 300 && resp.status >= 200) {
+			if (resp.status === 200) {
+				return resp.json();
+			}
+		} else if (resp.status === 401) {
+			throw Error("401 - Authentication failed");
+		} else if (resp.status === 404) {
+			throw Error("404 - Not Found");
+		} else if (resp.status === 409) {
+			throw Error("409 - Conflict");
+		} else if (resp.status === 500) {
+			throw Error("500 - Server error");
+		} else {
+			throw Error(`${resp.status} - Unexpected error`);
 		}
-		return resp.json();
 	}
 
 	public teardown() {
