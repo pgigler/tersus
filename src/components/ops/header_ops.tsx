@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { logout, getCurrentUser } from "../../util/auth";
 import { isBrowser } from "../../util/helper";
 import { Link, navigate, withPrefix } from "gatsby";
@@ -16,6 +16,12 @@ const MENUS: Menu[] = [
 ];
 
 const HeaderOps = () => {
+	const [client, setClient] = useState(false);
+
+	useEffect(() => {
+		setClient(true);
+	}, []);
+
 	let path = "";
 	if (isBrowser()) {
 		path = window.location.pathname;
@@ -55,7 +61,7 @@ const HeaderOps = () => {
 		>
 			{MENUS.map((item) => (
 				<a
-					key={item.slug}
+					key={`${item.slug}${client}`}
 					href={withPrefix(item.slug)}
 					onClick={(event) => {
 						event.preventDefault();
@@ -75,7 +81,6 @@ const HeaderOps = () => {
 					<div className="absolute bottom-0 left-0 w-full h-0"></div>
 				</a>
 			))}
-
 			<div className="hidden md:block">{loginLogout}</div>
 		</nav>
 	);

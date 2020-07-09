@@ -1,21 +1,28 @@
 import { Link, useStaticQuery, graphql } from "gatsby";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { isBrowser } from "../util/helper";
 
 interface Menu {
 	title: string;
 	slug: string;
+	hash?: string;
 }
 
 const MENUS: Menu[] = [
 	{ title: "Kezdőlap", slug: "/" },
 	{ title: "Termékek", slug: "/termekek" },
-	{ title: "Hasznos infók", slug: "/hasznos-infok#medence_vizkezelese" },
+	{ title: "Hasznos infók", slug: "/hasznos-infok", hash: "medence_vizkezelese" },
 	{ title: "Rólunk", slug: "/rolunk" },
 	{ title: "Kapcsolat", slug: "/#kapcsolat" },
 ];
 
 const Header = () => {
+	const [client, setClient] = useState(false);
+
+	useEffect(() => {
+		setClient(true);
+	}, []);
+
 	let path = "";
 	if (isBrowser()) {
 		path = window.location.pathname;
@@ -117,8 +124,8 @@ const Header = () => {
 			>
 				{MENUS.map((item) => (
 					<Link
-						key={item.slug}
-						to={item.slug}
+						key={`${item.slug}${client}`}
+						to={`${item.slug}${item.hash ? `#${item.hash}` : ""}`}
 						className={`menu relative whitespace-no-wrap py-4 pl-2 md:py-0 md:pl-0 flex items-center ${
 							(item.slug === "/" && (path === "/" || path === "/tersus/")) ||
 							(item.slug !== "/" && path.indexOf(item.slug) > -1)

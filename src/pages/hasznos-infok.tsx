@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { getFluid, isBrowser } from "../util/helper";
@@ -199,6 +199,12 @@ const UsefulInfoPage = () => {
 		}
 	`);
 
+	const [client, setClient] = useState(false);
+
+	useEffect(() => {
+		setClient(true);
+	}, []);
+
 	const fluidPool = getFluid(data.allFile.edges, "ui_pool.jpg");
 	const fluidAlgae = getFluid(data.allFile.edges, "ui_algae.jpg");
 	const fluidChemicals = getFluid(data.allFile.edges, "ui_chemicals.png");
@@ -234,7 +240,7 @@ const UsefulInfoPage = () => {
 							{articles.map((article) => (
 								<div key={article.id} className="my-2 mr-4">
 									{hash.indexOf(article.id) > -1 ? (
-										<div key={article.id} className="w-full btn btn-primary toggled">
+										<div key={`${article.id}${client}`} className="w-full btn btn-primary toggled">
 											{article.title}
 										</div>
 									) : (

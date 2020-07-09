@@ -4,6 +4,7 @@ import Footer from "./footer";
 import "./../../assets/main.scss";
 
 import Loadable from "@loadable/component";
+import HeaderOps from "./ops/header_ops";
 
 const LayoutOps = ({ children }: any) => {
 	return (
@@ -28,6 +29,6 @@ const LayoutOps = ({ children }: any) => {
 	);
 };
 
-const HeaderOps = Loadable(() => import("./ops/header_ops"));
+// const HeaderOps = Loadable(() => import("./ops/header_ops"));
 
 export default LayoutOps;
