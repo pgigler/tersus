@@ -39,7 +39,7 @@ const ProductsPage = () => {
 	useEffect(() => {
 		const products = getProducts(data.allMarkdownRemark.edges[0].node);
 		setProducts(products);
-	});
+	}, []);
 
 	const [products, setProducts] = useState<Product[]>([]);
 	return (
@@ -59,7 +59,7 @@ const ProductsPage = () => {
 				</div> */}
 
 				{productCategories.map((category) => (
-					<div id={category.id}>
+					<div key={category.id} id={category.id}>
 						<h1 className="pt-16 text-4xl leading-tight text-center font-semibold">{category.name}</h1>
 						<div className="flex flex-wrap">
 							{products

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import Product from "../interfaces/Product";
-import { getFixed, getImageUrlFromAsset } from "../util/helper";
-import Img from "gatsby-image";
 import PreviewCompatibleImage from "./preview-compatible-image";
+import { GlobalDispatchContext } from "../context/GlobalContextProvider";
+import { addToCart } from "../util/cart";
 
 const ProductItem = ({
 	product,
@@ -15,6 +15,8 @@ const ProductItem = ({
 	getAsset?: (...args: any[]) => any;
 	isPreview: boolean;
 }) => {
+	const globalDispatch = useContext(GlobalDispatchContext);
+
 	return (
 		<div key={product.id} className="flex flex-wrap md:flex-column mb-8" id={product.id}>
 			<div className="w-full md:w-1/2 text-center mb-8">
@@ -31,7 +33,18 @@ const ProductItem = ({
 					/>
 				</div>
 				<div className="text-xl font-semibold">{product.price} Ft</div>
-				{!isPreview ? <button className="mt-4 btn btn-primary">Kosárba</button> : ""}
+				{!isPreview ? (
+					<button
+						className="mt-4 btn btn-primary"
+						onClick={() => {
+							addToCart(product, 1, globalDispatch);
+						}}
+					>
+						Kosárba
+					</button>
+				) : (
+					""
+				)}
 			</div>
 			<div className="w-full md:w-1/2">
 				<h2 className="pt-1 text-xl leading-tight uppercase font-semibold">{product.subtitle}</h2>
