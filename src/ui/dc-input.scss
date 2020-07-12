@@ -1,0 +1,28 @@
+dc-input {
+	position: relative;
+	display: block;
+
+	input {
+		@apply appearance-none border border-gray-600 block w-full py-2 px-3 text-gray-800 leading-tight mb-4;
+
+		&[readonly] {
+			@apply bg-gray-200;
+		}
+
+		&.invalid {
+			@apply bg-red-200;
+		}
+	}
+
+	&.embedded {
+		input {
+			@apply mb-0;
+		}
+	}
+
+	.validation-result {
+		@apply text-red-500 text-xs font-bold absolute w-full left-0 bg-white pt-2;
+		top: 100%;
+		line-height: 1.2;
+	}
+}

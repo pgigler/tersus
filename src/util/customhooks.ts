@@ -1,5 +1,11 @@
 import { useLayoutEffect, useState, useEffect as reactUseEffect } from "react";
 import { ApiClient } from "./ApiClient";
+import { TemplateResult } from "lit-html";
+
+export interface HauntedFunc<P extends object> {
+	(this: (Element & P) | unknown, host: Element & P): TemplateResult;
+	observedAttributes?: (keyof P)[];
+}
 
 export function useWindowSize() {
 	const [size, setSize] = useState([0, 0]);

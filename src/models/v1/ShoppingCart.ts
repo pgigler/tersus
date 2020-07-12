@@ -18,29 +18,15 @@ export class ShoppingCart {
 		this.lastUpdated = new Date().getTime();
 	}
 
-	public addQuantity(itemId: string, quantity: number) {
-		const filteredItems = this.items.filter((item) => item.id === itemId);
-		if (filteredItems.length > 0) {
-			const itemToChange = filteredItems[0];
-			itemToChange.quantity += quantity;
-			// Quantity can beetween 0-10 (inclusive)
-			if (itemToChange.quantity < 0) {
-				itemToChange.quantity = 0;
-			}
-			if (itemToChange.quantity > 10) {
-				itemToChange.quantity = 10;
-			}
-		} else {
-			throw new Error(`item not found: ${itemId}`);
-		}
-		this.lastUpdated = new Date().getTime();
-	}
-
 	public setQuantity(itemId: string, quantity: number) {
 		const filteredItems = this.items.filter((item) => item.id === itemId);
 		if (filteredItems.length > 0) {
-			if (quantity >= 0 && quantity < 11) {
-				const itemToChange = filteredItems[0];
+			const itemToChange = filteredItems[0];
+			if (quantity < 0) {
+				itemToChange.quantity = 0;
+			} else if (quantity > 10) {
+				itemToChange.quantity = 10;
+			} else {
 				itemToChange.quantity = quantity;
 			}
 		} else {

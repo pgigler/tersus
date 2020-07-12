@@ -12,12 +12,12 @@ export class CartManager {
 		this.localStorage = localStorage;
 	}
 
-	private saveShoppingCart = (shoppingCart: ShoppingCartV1) => {
+	public saveShoppingCart = (shoppingCart: ShoppingCartV1) => {
 		this.localStorage.shoppingCart = JSON.stringify(shoppingCart);
 		this.localStorage.shoppingCartVersion = shoppingCart.version;
 	};
 
-	private removeShoppingCart = () => {
+	public removeShoppingCart = () => {
 		this.localStorage.removeItem("shoppingCart");
 		this.localStorage.removeItem("shoppingCartVersion");
 	};
@@ -29,13 +29,7 @@ export class CartManager {
 		globalDispatch({ type: "SET_CART_ITEM_NUM", num: shoppingCart.items.length });
 	};
 
-	public addQuantity = (itemId: string, quantity: number) => {
-		const shoppingCart = this.getShoppingCart();
-		shoppingCart.addQuantity(itemId, quantity);
-		this.saveShoppingCart(shoppingCart);
-    };
-
-    public setQuantity = (itemId: string, quantity: number) => {
+	public setQuantity = (itemId: string, quantity: number) => {
 		const shoppingCart = this.getShoppingCart();
 		shoppingCart.setQuantity(itemId, quantity);
 		this.saveShoppingCart(shoppingCart);

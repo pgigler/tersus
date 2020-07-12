@@ -8,6 +8,7 @@ import { CartManager } from "../util/CartManager";
 import { ShoppingCartItem } from "../models/v1/ShoppingCartItem";
 import Img from "gatsby-image";
 import { GlobalDispatchContext } from "../context/GlobalContextProvider";
+import DCInput, { ChangeEvent } from "../ui/dc-input";
 
 const ShoppingCartPage = () => {
 	const data = useStaticQuery(graphql`
@@ -38,6 +39,18 @@ const ShoppingCartPage = () => {
 		}
 	`);
 
+	const setQuantity = (itemIndex: number, val: string) => {
+		setQuantities(
+			quantities.map((q, i) => {
+				if (itemIndex === i) {
+					return val;
+				} else {
+					return q;
+				}
+			})
+		);
+	};
+
 	useEffect(() => {
 		const products = getProducts(data.allMarkdownRemark.edges[0].node);
 		setProducts(products);
@@ -48,8 +61,34 @@ const ShoppingCartPage = () => {
 	const cartManager = useMemo(() => new CartManager(window.localStorage), []);
 
 	const [shoppingCart, setShoppingCart] = useState(cartManager.getShoppingCart());
+	const [quantities, setQuantities] = useState<string[]>(
+		cartManager.getShoppingCart().items.map((item) => item.quantity.toString())
+	);
 
-	const itemTemplate = (item: ShoppingCartItem) => (
+	useEffect(() => {
+		const tempShoppingCart = cartManager.getShoppingCart();
+		const newQuantities = quantities.map((q, i) => {
+			let newQuantity = tempShoppingCart.items[i].quantity;
+			newQuantity = parseInt(q, 10);
+			if (isNaN(newQuantity)) {
+				newQuantity = tempShoppingCart.items[i].quantity;
+			} else if (tempShoppingCart.items[i].quantity !== newQuantity) {
+				tempShoppingCart.setQuantity(tempShoppingCart.items[i].id, newQuantity);
+				if (tempShoppingCart.items[i].quantity !== newQuantity) {
+					newQuantity = tempShoppingCart.items[i].quantity;
+				}
+			}
+
+			return newQuantity.toString();
+		});
+		cartManager.saveShoppingCart(tempShoppingCart);
+		setShoppingCart(cartManager.getShoppingCart());
+		if (quantities.filter((q, i) => newQuantities[i] !== q).length > 0) {
+			setQuantities(newQuantities);
+		}
+	}, [quantities]);
+
+	const itemTemplate = (item: ShoppingCartItem, itemIndex: number) => (
 		<div key={item.id} className="flex p-2 border bg-yellow-100 mb-2">
 			<div>
 				<Img fixed={getFixed(data.allFile.edges, item.imagename)} alt={item.name} />
@@ -74,49 +113,39 @@ const ShoppingCartPage = () => {
 						</button>
 					</div>
 				</div>
-				<div className="flex justify-between pb-4">
-					<div className="flex">
+				<div className="flex justify-between items-end flex-wrap pb-4">
+					<div className="flex items-center">
 						<div>
 							<button
-								className="mr-2 rounded-full bg-brand-blue w-6 border font-bold"
+								className="mr-2 rounded-full bg-brand-blue w-10 h-10 border font-bold focus:outline-none"
 								onClick={() => {
-									cartManager.addQuantity(item.id, -1);
-									setShoppingCart(cartManager.getShoppingCart());
+									setQuantity(itemIndex, (shoppingCart.items[itemIndex].quantity - 1).toString());
 								}}
 							>
 								-
 							</button>
 						</div>
-						<div className="w-8 mr-2">
-							<input
-								type="text"
-								className="border w-full pl-1"
-								value={item.quantity.toString()}
-								onChange={(e) => {
-									try {
-										const quantity = parseInt(e.target.value, 10);
-										cartManager.setQuantity(item.id, quantity);
-										setShoppingCart(cartManager.getShoppingCart());
-									} catch (ex) {
-										// continue regardless of parsing error
-									}
+						<div className="w-12 mr-2">
+							<DCInput
+								class="embedded"
+								value={quantities[itemIndex]}
+								onChange={(e: ChangeEvent) => {
+									setQuantity(itemIndex, e.detail.value);
 								}}
-								name="quantity"
-							/>
+							></DCInput>
 						</div>
 						<div>
 							<button
-								className="rounded-full bg-brand-blue w-6 border font-bold"
+								className="rounded-full bg-brand-blue w-10 h-10 border font-bold focus:outline-none"
 								onClick={() => {
-									cartManager.addQuantity(item.id, 1);
-									setShoppingCart(cartManager.getShoppingCart());
+									setQuantity(itemIndex, (shoppingCart.items[itemIndex].quantity + 1).toString());
 								}}
 							>
 								+
 							</button>
 						</div>
 					</div>
-					<div>{item.price} Ft</div>
+					<div className="pt-4">{item.price} Ft</div>
 				</div>
 			</div>
 		</div>
@@ -127,8 +156,13 @@ const ShoppingCartPage = () => {
 			<SEO title="Kosár" />
 			<div className="container px-4">
 				<h1 className="py-4 text-4xl leading-tight font-semibold">Kosár</h1>
-				{shoppingCart.items.map((item) => itemTemplate(item))}
-				<div>Összesen: {shoppingCart.sum()}</div>
+				{shoppingCart.items.map((item, i) => itemTemplate(item, i))}
+				<div className="flex justify-end w-full">
+					<div className="flex items-baseline">
+						<div className="font-bold text-2xl mr-2">Összesen:</div>
+						<div className="font-bold text-green-500 text-3xl">{shoppingCart.sum()} Ft</div>
+					</div>
+				</div>
 			</div>
 		</Layout>
 	);
