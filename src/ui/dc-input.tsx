@@ -4,7 +4,7 @@ import "./dc-input.scss";
 import { html } from "lit-html";
 import { HauntedFunc } from "../util/customhooks";
 
-const observedAttributes: (keyof Properties)[] = ["value", "label"];
+const observedAttributes: (keyof Properties)[] = [];
 const useShadowDOM = false;
 const name = "dc-input";
 
@@ -118,7 +118,7 @@ customElements.define(
 	})
 );
 
-// React
+// React Wrapper
 
 import React from "react";
 import useCustomElement from "../util/useCustomElement";

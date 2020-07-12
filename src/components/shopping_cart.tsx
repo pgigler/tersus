@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useMemo, useContext } from "react";
-import Layout from "../components/layout";
-import SEO from "../components/seo";
 import { useStaticQuery, graphql } from "gatsby";
 import { getProducts, getFixed } from "../util/helper";
 import Product from "../interfaces/Product";
@@ -9,8 +7,9 @@ import { ShoppingCartItem } from "../models/v1/ShoppingCartItem";
 import Img from "gatsby-image";
 import { GlobalDispatchContext } from "../context/GlobalContextProvider";
 import DCInput, { ChangeEvent } from "../ui/dc-input";
+import { CheckoutMode } from "../pages/kosar";
 
-const ShoppingCartPage = () => {
+const ShoppingCart = ({ mode }: { mode: CheckoutMode }) => {
 	const data = useStaticQuery(graphql`
 		query ShoppingCartPageQuery {
 			allFile(filter: { extension: { regex: "/(jpg)|(png)|(jpeg)/" }, relativeDirectory: { eq: "products" } }) {
@@ -88,6 +87,17 @@ const ShoppingCartPage = () => {
 		}
 	}, [quantities]);
 
+	const itemTemplateCollapsed = (item: ShoppingCartItem) => (
+		<div key={item.id} className="flex p-2 border bg-gray-100 mb-2">
+			<div className="px-2 w-full flex justify-between">
+				<div>{item.name}</div>
+				<div>
+					{item.quantity} X {item.price} Ft
+				</div>
+			</div>
+		</div>
+	);
+
 	const itemTemplate = (item: ShoppingCartItem, itemIndex: number) => (
 		<div key={item.id} className="flex p-2 border bg-yellow-100 mb-2">
 			<div>
@@ -152,20 +162,19 @@ const ShoppingCartPage = () => {
 	);
 
 	return (
-		<Layout>
-			<SEO title="Kosár" />
-			<div className="container px-4">
-				<h1 className="py-4 text-4xl leading-tight font-semibold">Kosár</h1>
-				{shoppingCart.items.map((item, i) => itemTemplate(item, i))}
-				<div className="flex justify-end w-full">
-					<div className="flex items-baseline">
-						<div className="font-bold text-2xl mr-2">Összesen:</div>
-						<div className="font-bold text-green-500 text-3xl">{shoppingCart.sum()} Ft</div>
-					</div>
+		<div>
+			<h1 className="text-2xl leading-tight font-semibold">Kosár</h1>
+			{mode === "OPEN"
+				? shoppingCart.items.map((item, i) => itemTemplate(item, i))
+				: shoppingCart.items.map((item) => itemTemplateCollapsed(item))}
+			<div className="flex justify-end w-full">
+				<div className="flex items-baseline">
+					<div className="font-bold text-2xl mr-2">Összesen:</div>
+					<div className="font-bold text-green-500 text-3xl">{shoppingCart.sum()} Ft</div>
 				</div>
 			</div>
-		</Layout>
+		</div>
 	);
 };
 
-export default ShoppingCartPage;
+export default ShoppingCart;

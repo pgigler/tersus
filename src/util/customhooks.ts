@@ -3,7 +3,7 @@ import { ApiClient } from "./ApiClient";
 import { TemplateResult } from "lit-html";
 
 export interface HauntedFunc<P extends object> {
-	(this: (Element & P) | unknown, host: Element & P): TemplateResult;
+	(this: (Element & P) | unknown, host: Element & P): TemplateResult | string;
 	observedAttributes?: (keyof P)[];
 }
 

@@ -49,7 +49,7 @@ const Header = () => {
 	// `);
 
 	const shoppingCart = (
-		<Link to="/shopping_cart">
+		<Link to="/kosar">
 			<div className="relative">
 				<svg
 					className="h-8 w-8 fill-current hover:text-brand-blue mr-2"
