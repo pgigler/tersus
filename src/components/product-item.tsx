@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Product from "../interfaces/Product";
 import PreviewCompatibleImage from "./preview-compatible-image";
 import { GlobalDispatchContext } from "../context/GlobalContextProvider";
-import { addToCart } from "../util/cart";
+import { CartManager } from "../util/CartManager";
 
 const ProductItem = ({
 	product,
@@ -37,7 +37,7 @@ const ProductItem = ({
 					<button
 						className="mt-4 btn btn-primary"
 						onClick={() => {
-							addToCart(product, 1, globalDispatch);
+							new CartManager(window.localStorage).addToCart(product, 1, globalDispatch);
 						}}
 					>
 						Kosárba

@@ -49,7 +49,7 @@ const ProductCategories = () => {
 						)}
 						<div className="w-1/4 bg-red-400">
 							<Link to={pc.slug}>
-								<Img fluid={getFluid(data.allFile.edges, pc.imagename)} alt="{pc.name}" />
+								<Img fluid={getFluid(data.allFile.edges, pc.imagename)} alt={pc.name} />
 							</Link>
 						</div>
 						{i % 4 < 2 ? (
@@ -78,7 +78,7 @@ const ProductCategories = () => {
 						)}
 						<div className="w-1/2 bg-red-400">
 							<Link to={pc.slug}>
-								<Img fluid={getFluid(data.allFile.edges, pc.imagename)} alt="{pc.name}" />
+								<Img fluid={getFluid(data.allFile.edges, pc.imagename)} alt={pc.name} />
 							</Link>
 						</div>
 						{i % 2 === 0 ? (
@@ -98,7 +98,7 @@ const ProductCategories = () => {
 					<React.Fragment key={i}>
 						<div className="w-full text-center bg-red-400">
 							<Link to={pc.slug}>
-								<Img fluid={getFluid(data.allFile.edges, pc.imagename)} alt="{pc.name}" />
+								<Img fluid={getFluid(data.allFile.edges, pc.imagename)} alt={pc.name} />
 							</Link>
 						</div>
 						<div style={{ height: "400px" }} className="w-full bg-brand-blue1">

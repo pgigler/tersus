@@ -75,7 +75,7 @@ const ProductsPage = () => {
 												<div>
 													<Img
 														fixed={getFixed(data.allFile.edges, product.imagename)}
-														alt="{product.name}"
+														alt={product.name}
 													/>
 												</div>
 												<div className="text-center text-xl font-semibold">{product.name}</div>

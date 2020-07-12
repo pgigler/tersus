@@ -180,7 +180,7 @@ const ProductCarousel = ({ count }: { count: number }) => {
 													<Img
 														style={{ maxWidth: "200px", width: `${getItemWidth() - 50}px` }}
 														fluid={getFluid(data.allFile.edges, product.imagename)}
-														alt="{product.name}"
+														alt={product.name}
 													/>
 												</div>
 												<div className="text-center text-xl font-semibold">{product.name}</div>

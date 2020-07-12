@@ -1,5 +1,5 @@
 import React, { useReducer, createContext, Dispatch } from "react";
-import { getShoppingCart } from "../util/cart";
+import { CartManager } from "../util/CartManager";
 
 interface GlobalState {
 	numberOfItems: number;
@@ -30,7 +30,9 @@ function reducer(state: GlobalState, action: GlobalAction) {
 }
 
 const GlobalContextProvider = ({ children }) => {
-	const [state, dispatch] = useReducer(reducer, { numberOfItems: getShoppingCart().items.length });
+	const [state, dispatch] = useReducer(reducer, {
+		numberOfItems: new CartManager(window.localStorage).getShoppingCart().items.length,
+	});
 	return (
 		<GlobalStateContext.Provider value={state}>
 			<GlobalDispatchContext.Provider value={dispatch}>{children}</GlobalDispatchContext.Provider>
