@@ -5,7 +5,7 @@ import SEO from "../components/seo";
 const PrivacyPolicyPage = () => (
 	<Layout>
 		<SEO title="Adatvédelmi tájékoztató" />
-		<div className="container text-brand-grayt px-4">
+		<div className="container text-brand-grayt p-4">
 			<h1 className="text-3xl uppercase mb-8">Adatvédelmi tájékoztató</h1>
 			<p>
 				Aqsztid Bt understands that the customer’s privacy is important. In respect of the privacy of the Firm’s

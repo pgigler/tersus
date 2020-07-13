@@ -72,6 +72,10 @@ const Footer = () => {
 					<div className="mb-2">
 						<Link className="hover:text-brand-blue" to="/adatvedelmi-tajekoztato">
 							Adatvédelmi tájékoztató
+						</Link>{" "}
+						|{" "}
+						<Link className="hover:text-brand-blue" to="/felhasznalasi-feltetelek">
+							Felhasználási feltételek
 						</Link>
 					</div>
 				</div>

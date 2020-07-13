@@ -5,6 +5,7 @@ declare global {
 			"dc-input": any;
 			"dc-radio": any;
 			"te-transport-modes": any;
+			"te-payment-modes": any;
 		}
 	}
 }
