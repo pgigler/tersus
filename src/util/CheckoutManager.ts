@@ -1,6 +1,4 @@
 import { CheckoutData as CheckoutDataV1 } from "../models/v1/CheckoutData";
-import { TransportMode } from "../cc/transport_modes";
-import { PaymentMode } from "../cc/payment_modes";
 
 export class CheckoutManager {
 	private sessionStorage: Storage;
@@ -19,22 +17,10 @@ export class CheckoutManager {
 		this.sessionStorage.removeItem("checkoutDataVersion");
 	};
 
-	public setTransportMode(transportMode: TransportMode) {
-		const checkoutData = this.getCheckoutData();
-		checkoutData.setTransportMode(transportMode);
-		this.saveCheckoutData(checkoutData);
-	}
-
-	public setPaymentMode(paymentMode: PaymentMode) {
-		const checkoutData = this.getCheckoutData();
-		checkoutData.setPaymentMode(paymentMode);
-		this.saveCheckoutData(checkoutData);
-	}
-
 	public getCheckoutData = (): CheckoutDataV1 => {
 		if (this.sessionStorage.checkoutData) {
 			if (this.sessionStorage.checkoutDataVersion === "v1") {
-				const checkoutData = new CheckoutDataV1(JSON.parse(this.sessionStorage.checkoutData));
+				const checkoutData = JSON.parse(this.sessionStorage.checkoutData);
 				return checkoutData;
 			} else {
 				this.removeCheckoutData();

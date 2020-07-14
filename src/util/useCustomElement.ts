@@ -37,21 +37,15 @@ const useCustomElement = (props, customMapping = {}) => {
 							current.style[styleKey] = prop[styleKey];
 						});
 					} else {
+						if (computedKey === "checkoutData") {
+							// eslint-disable-next-line no-console
+							console.log(prop);
+							// eslint-disable-next-line no-console
+							console.log(current);
+						}
 						current[computedKey] = prop;
 					}
 				});
-
-			// ((acc, key) => {
-			//     const prop = props[key];
-
-			//     const computedKey = customMapping[key] || key;
-
-			//     if (prop instanceof Object || prop instanceof Array) {
-			//         { ...acc, [computedKey]: JSON.stringify(prop) };
-			//     }
-
-			//     { ...acc, [computedKey]: prop }
-			// };
 
 			// Add event listeners
 			fns = Object.keys(props)

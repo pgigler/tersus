@@ -27,6 +27,9 @@ module.exports = {
 			},
 		},
 		extend: {
+			boxShadow: {
+				select: "rgba(0, 0, 0, 0.3) 0 1px 5px 0",
+			},
 			height: {
 				"250px": "250px",
 				"330px": "330px",

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useStaticQuery, graphql } from "gatsby";
-import { shiftRight, shiftLeft, getFluid, getProducts } from "../util/helper";
+import { shiftRight, shiftLeft, getFluid, getProducts, formatMoney } from "../util/helper";
 import Img from "gatsby-image";
 import { useWindowSize } from "../util/customhooks";
 import Product from "../interfaces/Product";
@@ -184,7 +184,7 @@ const ProductCarousel = ({ count }: { count: number }) => {
 													/>
 												</div>
 												<div className="text-center text-xl font-semibold">{product.name}</div>
-												<div className="text-center">{product.price} Ft</div>
+												<div className="text-center">{formatMoney(product.price)}</div>
 											</div>
 										</div>
 									</Link>

@@ -3,6 +3,7 @@ import Product from "../interfaces/Product";
 import PreviewCompatibleImage from "./preview-compatible-image";
 import { GlobalDispatchContext } from "../context/GlobalContextProvider";
 import { CartManager } from "../util/CartManager";
+import { formatMoney } from "../util/helper";
 
 const ProductItem = ({
 	product,
@@ -32,7 +33,7 @@ const ProductItem = ({
 						}}
 					/>
 				</div>
-				<div className="text-xl font-semibold">{product.price} Ft</div>
+				<div className="text-xl font-semibold">{formatMoney(product.price)}</div>
 				{!isPreview ? (
 					<button
 						className="mt-4 btn btn-primary"

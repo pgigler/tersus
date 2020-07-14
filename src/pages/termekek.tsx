@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import productCategories from "../../data/product_categories.json";
-import { getFixed, getProducts } from "../util/helper";
+import { getFixed, getProducts, formatMoney } from "../util/helper";
 import { Link, useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
 import Product from "../interfaces/Product";
@@ -79,7 +79,7 @@ const ProductsPage = () => {
 													/>
 												</div>
 												<div className="text-center text-xl font-semibold">{product.name}</div>
-												<div className="text-center">{product.price} Ft</div>
+												<div className="text-center">{formatMoney(product.price)}</div>
 											</div>
 										</Link>
 									</div>

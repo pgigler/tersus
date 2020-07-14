@@ -50,6 +50,7 @@
     "gatsby-plugin-purgecss": "^5.0.0",
     "gatsby-plugin-sass": "^2.3.1",
     "gatsby-plugin-scss-typescript": "^4.0.10",
+    "gatsby-plugin-sitemap": "^2.4.11",
     "gatsby-remark-image-attributes": "^0.2.1",
     "gatsby-remark-images": "^3.3.3",
     "gatsby-source-filesystem": "^2.3.1",

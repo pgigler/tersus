@@ -1,23 +1,14 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useReducer } from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import ShoppingCart from "../components/shopping_cart";
 import TransportModes from "../cc/transport_modes";
 import PaymentModes from "../cc/payment_modes";
-import { CheckoutData } from "../models/v1/CheckoutData";
+import { CheckoutData, CHECKOUT_STATES, CheckoutState } from "../models/v1/CheckoutData";
 import { CheckoutManager } from "../util/CheckoutManager";
-
-type CheckoutState = "SHOPPING_CART" | "TRANSPORT_MODES" | "PAYMENT_MODES" | "TRANSPORT_AND_BILLING_INFO" | "SUMMARY";
+import ShippingAndBillingInfo from "../cc/shipping_and_billing_info";
 
 export type CheckoutMode = "HIDDEN" | "OPEN" | "COLLAPSED";
-
-const CHECKOUT_STATES: CheckoutState[] = [
-	"SHOPPING_CART",
-	"TRANSPORT_MODES",
-	"PAYMENT_MODES",
-	"TRANSPORT_AND_BILLING_INFO",
-	"SUMMARY",
-];
 
 interface CheckoutChangeEventDetail {
 	checkoutData: CheckoutData;
@@ -29,46 +20,35 @@ export class CheckoutChangeEvent extends CustomEvent<CheckoutChangeEventDetail> 
 	}
 }
 
+const checkoutDataReducer = (
+	state: CheckoutData,
+	action: { type: "next" | "previous" | "set"; value?: CheckoutData }
+) => {
+	let cd: CheckoutData;
+	switch (action.type) {
+		case "next":
+			cd = { ...state, checkoutState: CheckoutData.getNextState(state) };
+			break;
+		case "previous":
+			cd = { ...state, checkoutState: CheckoutData.getPreviousState(state) };
+			break;
+		case "set":
+			cd = { ...state, ...action.value };
+			break;
+		default:
+			throw new Error();
+	}
+	return cd;
+};
+
 const ShoppingCartPage = () => {
 	const checkoutManager = useMemo(() => new CheckoutManager(window.sessionStorage), []);
-	const [checkoutState, setCheckoutState] = useState<CheckoutState>("SHOPPING_CART");
 	const [privacyPolicyAccepted, setPrivacyPolicyAccepted] = useState(false);
 	const [termsAndConditionsAccepted, setTermsAndConditionsAccepted] = useState(false);
-	const [checkoutData, setCheckoutData] = useState<CheckoutData>(checkoutManager.getCheckoutData());
-
-	const nextState = () => {
-		const currentIndex = getCurrentIndex();
-		if (currentIndex < CHECKOUT_STATES.length - 1) {
-			setCheckoutState(CHECKOUT_STATES[currentIndex + 1]);
-		}
-	};
-
-	const nextStateIsEnabled = (): boolean => {
-		if (checkoutState === "SHOPPING_CART") {
-			return true;
-		} else if (checkoutState === "TRANSPORT_MODES") {
-			return (
-				(checkoutData.transportMode !== "none" && checkoutData.transportMode === "personal_collection") ||
-				(checkoutData.transportMode === "home_delivery" && checkoutData.shippingAddress?.zip !== undefined)
-			);
-		} else if (checkoutState === "PAYMENT_MODES") {
-			return checkoutData.paymentMode !== "none";
-		} else if (checkoutState === "TRANSPORT_AND_BILLING_INFO") {
-			return checkoutData.transportMode === "home_delivery" && checkoutData.shippingAddress !== undefined;
-		} else {
-			return false;
-		}
-	};
-
-	const previousState = () => {
-		const currentIndex = getCurrentIndex();
-		if (currentIndex > 0) {
-			setCheckoutState(CHECKOUT_STATES[currentIndex - 1]);
-		}
-	};
+	const [checkoutData, dispatchCheckoutData] = useReducer(checkoutDataReducer, checkoutManager.getCheckoutData());
 
 	const getCheckoutMode = (elem: CheckoutState): CheckoutMode => {
-		const currentIndex = getCurrentIndex();
+		const currentIndex = CheckoutData.getCurrentStateIndex(checkoutData);
 		const elemIndex = CHECKOUT_STATES.findIndex((state) => state === elem);
 		if (currentIndex > elemIndex) {
 			return "COLLAPSED";
@@ -79,13 +59,13 @@ const ShoppingCartPage = () => {
 		}
 	};
 
-	const getCurrentIndex = (): number => {
-		return CHECKOUT_STATES.findIndex((state) => state === checkoutState);
+	const handleCheckoutChange = (e: CheckoutChangeEvent) => {
+		dispatchCheckoutData({ type: "set", value: e.detail.checkoutData });
 	};
 
-	const handleCheckoutChange = (e: CheckoutChangeEvent) => {
-		setCheckoutData(e.detail.checkoutData);
-	};
+	useEffect(() => {
+		checkoutManager.saveCheckoutData(checkoutData);
+	}, [checkoutData]);
 
 	return (
 		<Layout>
@@ -109,11 +89,18 @@ const ShoppingCartPage = () => {
 					/>
 				</div>
 				<div className="mb-4">
-					{getCurrentIndex() > 0 ? (
+					<ShippingAndBillingInfo
+						mode={getCheckoutMode("TRANSPORT_AND_BILLING_INFO")}
+						checkoutData={checkoutData}
+						onChange={handleCheckoutChange}
+					/>
+				</div>
+				<div className="mb-4">
+					{CheckoutData.getCurrentStateIndex(checkoutData) > 0 ? (
 						<button
 							className="btn btn-primary mr-4"
 							onClick={() => {
-								previousState();
+								dispatchCheckoutData({ type: "previous" });
 							}}
 						>
 							Vissza
@@ -121,12 +108,12 @@ const ShoppingCartPage = () => {
 					) : (
 						""
 					)}
-					{getCurrentIndex() < CHECKOUT_STATES.length - 1 ? (
+					{CheckoutData.getCurrentStateIndex(checkoutData) < CHECKOUT_STATES.length - 1 ? (
 						<button
 							className="btn btn-primary mr-4"
-							disabled={!nextStateIsEnabled()}
+							disabled={!CheckoutData.nextStateIsEnabled(checkoutData)}
 							onClick={() => {
-								nextState();
+								dispatchCheckoutData({ type: "next" });
 							}}
 						>
 							Tovább
@@ -134,7 +121,7 @@ const ShoppingCartPage = () => {
 					) : (
 						""
 					)}
-					{checkoutState === "SUMMARY" ? (
+					{checkoutData.checkoutState === "SUMMARY" ? (
 						<div>
 							<div>Elfogadom a felhasználási feltételeket</div>
 							<div>Elfogadom az adatkezelési tájékoztatót</div>

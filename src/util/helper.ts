@@ -44,3 +44,8 @@ export const withErrorHandling = (callback: () => Promise<void> | void, errorHan
 		errorHandler(error);
 	}
 };
+
+export const formatMoney = (pNum: number | string) => {
+	const num = typeof pNum === "string" ? parseFloat(pNum) : pNum;
+	return Intl.NumberFormat("hu-HU", { maximumSignificantDigits: 2 }).format(num) + " Ft";
+};

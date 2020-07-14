@@ -1,5 +1,6 @@
 import { useEffect, useState, component } from "haunted";
 import { CheckoutMode, CheckoutChangeEvent } from "../pages/kosar";
+import homeDeliveryPlaces from "../../data/home_delivery_places.json";
 
 import { html } from "lit-html";
 import { HauntedFunc } from "../util/customhooks";
@@ -8,7 +9,7 @@ import * as DC from "../ui/dc-components-typing";
 
 const observedAttributes: (keyof Properties)[] = [];
 const useShadowDOM = false;
-const name = "te-payment-modes";
+const name = "te-shipping-and-billing";
 
 const DEFAULTS: Properties = {
 	mode: "HIDDEN",
@@ -19,15 +20,6 @@ interface Properties {
 	mode: CheckoutMode;
 	checkoutData: CheckoutData;
 }
-
-export type PaymentMode = "cash" | "bank_transfer" | "card" | "none";
-
-const PAYMENT_MODES: { [key in PaymentMode]: string } = {
-	cash: "Készpénz",
-	bank_transfer: "Banki átutalás",
-	card: "Bankkártya",
-	none: "Nincs kiválasztva",
-};
 
 const Component: HauntedFunc<Properties> = (host) => {
 	const props: Properties = {
@@ -41,61 +33,26 @@ const Component: HauntedFunc<Properties> = (host) => {
 		setCheckoutData(props.checkoutData);
 	}, [props.checkoutData]);
 
-	const handleChange = (e: DC.Radio.ChangeEvent) => {
-		const paymentMode = e.detail.itemId as PaymentMode;
-		CheckoutData.setPaymentMode(checkoutData, paymentMode);
-		host.dispatchEvent(new CheckoutChangeEvent({ checkoutData }));
-	};
+	// const handleChange = (e: any) => {
+	// 	host.dispatchEvent(new CheckoutChangeEvent({ checkoutData }));
+	// };
 
 	// TEMPLATE
 
-	const header = () => {
-		return html`<h1 class="text-2xl leading-tight font-semibold">Fizetési mód</h1>`;
-	};
-
 	const normalTemplate = () => {
 		return html`<div>
-			${header()}
+			<h1 class="text-2xl leading-tight font-semibold">Szállítási és számlázási infók</h1>
 			<div class="p-2 border bg-yellow-100">
-				<div class="mb-2">
-					<dc-radio
-						.name=${"paymentMode"}
-						.itemId=${"bank_transfer"}
-						.checked=${checkoutData.paymentMode === "bank_transfer"}
-						.content=${html`${PAYMENT_MODES.bank_transfer}`}
-						@change=${handleChange}
-					></dc-radio>
-				</div>
-				<div>
-					<dc-radio
-						.name=${"paymentMode"}
-						.itemId=${"cash"}
-						.checked=${checkoutData.paymentMode === "cash"}
-						@change=${handleChange}
-						.content=${html`<div>
-							${PAYMENT_MODES.cash}
-						</div>`}
-					></dc-radio>
-				</div>
-				<!-- <div class="mb-2">
-					<dc-radio
-						.name=${"paymentMode"}
-						.itemId=${"card"}
-						@change=${handleChange}
-						.content=${html`<div>
-					<div>Kártya</div>
-				</div>`}
-					></dc-radio>
-				</div> -->
+				Something N
 			</div>
 		</div> `;
 	};
 
 	const collapsedTemplate = () => {
 		return html`<div>
-			${header()}
+			<h1 class="text-2xl leading-tight font-semibold">Szállítási és számlázási infók</h1>
 			<div class="p-2 border bg-gray-100">
-				${PAYMENT_MODES[checkoutData.paymentMode]}
+				Something C
 			</div>
 		</div> `;
 	};
@@ -125,13 +82,13 @@ import React from "react";
 import useCustomElement from "../util/useCustomElement";
 import { CheckoutData } from "../models/v1/CheckoutData";
 
-const PaymentModes = (props) => {
+const ShippingAndBillingInfo = (props) => {
 	const [ref] = useCustomElement(props);
 	return (
 		<div>
-			<te-payment-modes ref={ref} />
+			<te-shipping-and-billing ref={ref} />
 		</div>
 	);
 };
 
-export default PaymentModes;
+export default ShippingAndBillingInfo;

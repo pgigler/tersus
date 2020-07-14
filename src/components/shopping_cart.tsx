@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo, useContext } from "react";
 import { useStaticQuery, graphql } from "gatsby";
-import { getProducts, getFixed } from "../util/helper";
+import { getProducts, getFixed, formatMoney } from "../util/helper";
 import Product from "../interfaces/Product";
 import { CartManager } from "../util/CartManager";
 import { ShoppingCartItem } from "../models/v1/ShoppingCartItem";
@@ -92,7 +92,7 @@ const ShoppingCart = ({ mode }: { mode: CheckoutMode }) => {
 			<div className="px-2 w-full flex justify-between">
 				<div>{item.name}</div>
 				<div>
-					{item.quantity} X {item.price} Ft
+					{item.quantity} X {formatMoney(item.price)}
 				</div>
 			</div>
 		</div>
@@ -155,7 +155,7 @@ const ShoppingCart = ({ mode }: { mode: CheckoutMode }) => {
 							</button>
 						</div>
 					</div>
-					<div className="pt-4">{item.price} Ft</div>
+					<div className="pt-4">{formatMoney(item.price)}</div>
 				</div>
 			</div>
 		</div>
@@ -170,7 +170,7 @@ const ShoppingCart = ({ mode }: { mode: CheckoutMode }) => {
 			<div className="flex justify-end w-full">
 				<div className="flex items-baseline">
 					<div className="font-bold text-2xl mr-2">Összesen:</div>
-					<div className="font-bold text-green-500 text-3xl">{shoppingCart.sum()} Ft</div>
+					<div className="font-bold text-green-500 text-3xl">{formatMoney(shoppingCart.sum())}</div>
 				</div>
 			</div>
 		</div>

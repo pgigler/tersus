@@ -4,8 +4,10 @@ declare global {
 		interface IntrinsicElements {
 			"dc-input": any;
 			"dc-radio": any;
+			"dc-select": any;
 			"te-transport-modes": any;
 			"te-payment-modes": any;
+			"te-shipping-and-billing": any;
 		}
 	}
 }
