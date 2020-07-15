@@ -1,15 +1,14 @@
 import React, { useEffect, useState, useMemo, useContext } from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, navigate } from "gatsby";
 import { getProducts, getFixed, formatMoney } from "../util/helper";
 import Product from "../interfaces/Product";
 import { CartManager } from "../util/CartManager";
 import { ShoppingCartItem } from "../models/v1/ShoppingCartItem";
 import Img from "gatsby-image";
-import { GlobalDispatchContext } from "../context/GlobalContextProvider";
+import { GlobalDispatchContext, GlobalStateContext } from "../context/GlobalContextProvider";
 import DCInput, { ChangeEvent } from "../ui/dc-input";
-import { CheckoutMode } from "../pages/kosar";
 
-const ShoppingCart = ({ mode }: { mode: CheckoutMode }) => {
+const ShoppingCart = ({ summary }: { summary?: boolean } = { summary: false }) => {
 	const data = useStaticQuery(graphql`
 		query ShoppingCartPageQuery {
 			allFile(filter: { extension: { regex: "/(jpg)|(png)|(jpeg)/" }, relativeDirectory: { eq: "products" } }) {
@@ -56,7 +55,8 @@ const ShoppingCart = ({ mode }: { mode: CheckoutMode }) => {
 	}, []);
 
 	const globalDispatch = useContext(GlobalDispatchContext);
-	const [products, setProducts] = useState<Product[]>([]);
+	const globalState = useContext(GlobalStateContext);
+	const [, setProducts] = useState<Product[]>([]);
 	const cartManager = useMemo(() => new CartManager(window.localStorage), []);
 
 	const [shoppingCart, setShoppingCart] = useState(cartManager.getShoppingCart());
@@ -82,17 +82,22 @@ const ShoppingCart = ({ mode }: { mode: CheckoutMode }) => {
 		});
 		cartManager.saveShoppingCart(tempShoppingCart);
 		setShoppingCart(cartManager.getShoppingCart());
+		globalDispatch({ type: "SET_CART_ITEM_NUM", num: tempShoppingCart.sum() });
 		if (quantities.filter((q, i) => newQuantities[i] !== q).length > 0) {
 			setQuantities(newQuantities);
 		}
 	}, [quantities]);
 
-	const itemTemplateCollapsed = (item: ShoppingCartItem) => (
+	const summaryTemplate = (item: ShoppingCartItem) => (
 		<div key={item.id} className="flex p-2 border bg-gray-100 mb-2">
 			<div className="px-2 w-full flex justify-between">
-				<div>{item.name}</div>
 				<div>
-					{item.quantity} X {formatMoney(item.price)}
+					<span className="checkout-data">{item.name}</span>
+				</div>
+				<div>
+					<span className="checkout-data">
+						{item.quantity} X {formatMoney(item.price)}
+					</span>
 				</div>
 			</div>
 		</div>
@@ -137,7 +142,7 @@ const ShoppingCart = ({ mode }: { mode: CheckoutMode }) => {
 						</div>
 						<div className="w-12 mr-2">
 							<DCInput
-								class="embedded"
+								embedded={true}
 								value={quantities[itemIndex]}
 								onChange={(e: ChangeEvent) => {
 									setQuantity(itemIndex, e.detail.value);
@@ -163,16 +168,38 @@ const ShoppingCart = ({ mode }: { mode: CheckoutMode }) => {
 
 	return (
 		<div>
-			<h1 className="text-2xl leading-tight font-semibold">Kosár</h1>
-			{mode === "OPEN"
-				? shoppingCart.items.map((item, i) => itemTemplate(item, i))
-				: shoppingCart.items.map((item) => itemTemplateCollapsed(item))}
-			<div className="flex justify-end w-full">
-				<div className="flex items-baseline">
-					<div className="font-bold text-2xl mr-2">Összesen:</div>
-					<div className="font-bold text-green-500 text-3xl">{formatMoney(shoppingCart.sum())}</div>
+			{globalState.numberOfItems > 0 ? (
+				<div>
+					<h1 className="text-2xl leading-tight font-semibold">Termékek</h1>
+					<div>
+						{summary
+							? shoppingCart.items.map((item) => summaryTemplate(item))
+							: shoppingCart.items.map((item, i) => itemTemplate(item, i))}
+						<div className="flex justify-end w-full">
+							<div className="flex items-baseline">
+								<div className="font-bold text-2xl mr-2">Összesen:</div>
+								<div className="font-bold text-green-500 text-3xl">
+									{formatMoney(shoppingCart.priceSum())}
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
+			) : (
+				<div>
+					<div className="py-8 text-2xl">A kosara üres</div>
+					<div className="flex justify-end">
+						<button
+							className="btn btn-primary ml-4"
+							onClick={() => {
+								navigate("/termekek");
+							}}
+						>
+							Tovább a termékekhez
+						</button>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };

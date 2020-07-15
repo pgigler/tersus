@@ -37,10 +37,8 @@ export interface SelectItem {
 	value: string;
 }
 
-export class SelectChangeEvent extends CustomEvent<ChangeEventDetail> {
-	constructor(detail: ChangeEventDetail) {
-		super("change", { detail });
-	}
+export interface SelectChangeEvent {
+	detail: ChangeEventDetail;
 }
 
 const Component: HauntedFunc<Properties> = (host) => {
@@ -69,17 +67,21 @@ const Component: HauntedFunc<Properties> = (host) => {
 
 			if (props.multiSelect) {
 				host.dispatchEvent(
-					new SelectChangeEvent({
-						selectedIndices: newIndices,
-						selectedValues: newIndices.map((i) => dataSource[i].value),
+					new CustomEvent("change", {
+						detail: {
+							selectedIndices: newIndices,
+							selectedValues: newIndices.map((i) => dataSource[i].value),
+						},
 					})
 				);
 			} else {
 				setOpened(false);
 				host.dispatchEvent(
-					new SelectChangeEvent({
-						selectedIndex: index,
-						selectedValue: dataSource[index].value,
+					new CustomEvent("change", {
+						detail: {
+							selectedIndex: index,
+							selectedValue: dataSource[index].value,
+						},
 					})
 				);
 			}
@@ -192,18 +194,20 @@ const Component: HauntedFunc<Properties> = (host) => {
 	`;
 };
 
-customElements.define(
-	name,
-	component<HTMLElement & Properties>(Component, {
-		useShadowDOM,
-		observedAttributes,
-	})
-);
-
+if (isBrowser()) {
+	customElements.define(
+		name,
+		component<HTMLElement & Properties>(Component, {
+			useShadowDOM,
+			observedAttributes,
+		})
+	);
+}
 // React Wrapper
 
 import React from "react";
 import useCustomElement from "../util/useCustomElement";
+import { isBrowser } from "../util/helper";
 
 const DCSelect = (props) => {
 	const [ref] = useCustomElement(props);

@@ -3,6 +3,7 @@ declare global {
 	namespace JSX {
 		interface IntrinsicElements {
 			"dc-input": any;
+			"dc-checkbox": any;
 			"dc-radio": any;
 			"dc-select": any;
 			"te-transport-modes": any;

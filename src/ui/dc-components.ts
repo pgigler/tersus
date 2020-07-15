@@ -1,3 +1,4 @@
-import "../ui/dc-radio";
-import "../ui/dc-input";
-import "../ui/dc-select";
+import "./dc-radio";
+import "./dc-input";
+import "./dc-select";
+import "./dc-checkbox";

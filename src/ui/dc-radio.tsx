@@ -26,10 +26,8 @@ interface ChangeEventDetail {
 	itemId: string;
 }
 
-export class ChangeEvent extends CustomEvent<ChangeEventDetail> {
-	constructor(detail: ChangeEventDetail) {
-		super("change", { detail });
-	}
+export interface ChangeEvent {
+	detail: ChangeEventDetail;
 }
 
 const Component: HauntedFunc<Properties> = (host) => {
@@ -45,8 +43,10 @@ const Component: HauntedFunc<Properties> = (host) => {
 	const onChange = (e: CustomEvent, itemId: string) => {
 		e.stopPropagation();
 		host.dispatchEvent(
-			new ChangeEvent({
-				itemId,
+			new CustomEvent<ChangeEventDetail>("change", {
+				detail: {
+					itemId,
+				},
 			})
 		);
 	};
@@ -73,18 +73,20 @@ const Component: HauntedFunc<Properties> = (host) => {
 	`;
 };
 
-customElements.define(
-	name,
-	component<HTMLElement & Properties>(Component, {
-		useShadowDOM,
-		observedAttributes,
-	})
-);
-
+if (isBrowser()) {
+	customElements.define(
+		name,
+		component<HTMLElement & Properties>(Component, {
+			useShadowDOM,
+			observedAttributes,
+		})
+	);
+}
 // React Wrapper
 
 import React from "react";
 import useCustomElement from "../util/useCustomElement";
+import { isBrowser } from "../util/helper";
 
 const DCRadio = (props) => {
 	const [ref] = useCustomElement(props);

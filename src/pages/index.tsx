@@ -50,7 +50,7 @@ const IndexPage = () => {
 									</div>
 									<div className="mt-4">
 										<Link to="/termekek">
-											<div className="btn btn-primary-inv">Vásárlás</div>
+											<div className="btn btn-primary btn-transparent">Vásárlás</div>
 										</Link>
 									</div>
 								</div>

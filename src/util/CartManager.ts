@@ -26,25 +26,19 @@ export class CartManager {
 		const shoppingCart = this.getShoppingCart();
 		shoppingCart.removeItem(itemId);
 		this.saveShoppingCart(shoppingCart);
-		globalDispatch({ type: "SET_CART_ITEM_NUM", num: shoppingCart.items.length });
-	};
-
-	public setQuantity = (itemId: string, quantity: number) => {
-		const shoppingCart = this.getShoppingCart();
-		shoppingCart.setQuantity(itemId, quantity);
-		this.saveShoppingCart(shoppingCart);
+		globalDispatch({ type: "SET_CART_ITEM_NUM", num: shoppingCart.sum() });
 	};
 
 	public addToCart = (product: Product, quantity: number, globalDispatch: Dispatch<GlobalAction>) => {
-		const shoppingCart = this.getShoppingCart();
+        const shoppingCart = this.getShoppingCart();
 		shoppingCart.addProduct(product, quantity);
 		this.saveShoppingCart(shoppingCart);
-		globalDispatch({ type: "SET_CART_ITEM_NUM", num: shoppingCart.items.length });
+		globalDispatch({ type: "SET_CART_ITEM_NUM", num: shoppingCart.sum() });
 	};
 
 	public sum() {
 		const shoppingCart = this.getShoppingCart();
-		return shoppingCart.sum();
+		return shoppingCart.priceSum();
 	}
 
 	public getShoppingCart = (): ShoppingCartV1 => {

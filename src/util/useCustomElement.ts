@@ -37,12 +37,6 @@ const useCustomElement = (props, customMapping = {}) => {
 							current.style[styleKey] = prop[styleKey];
 						});
 					} else {
-						if (computedKey === "checkoutData") {
-							// eslint-disable-next-line no-console
-							console.log(prop);
-							// eslint-disable-next-line no-console
-							console.log(current);
-						}
 						current[computedKey] = prop;
 					}
 				});
@@ -52,7 +46,11 @@ const useCustomElement = (props, customMapping = {}) => {
 				.filter((key) => props[key] instanceof Function)
 				.map((key) => ({
 					key: mapEventListenerKey(customMapping, key),
-					fn: (customEvent) => props[key](customEvent),
+					fn: (customEvent) => {
+						if (customEvent.detail !== undefined) {
+							props[key](customEvent);
+						}
+					},
 				}));
 
 			fns.forEach(({ key, fn }) => current.addEventListener(key, fn));

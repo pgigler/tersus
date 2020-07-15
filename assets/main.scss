@@ -9,36 +9,54 @@
 @tailwind utilities;
 
 .btn {
-	@apply border uppercase text-center px-10 py-2 inline-block;
-
-	&.btn-primary-inv {
-		@apply text-white uppercase whitespace-no-wrap text-xl duration-500;
-		&:hover {
-			@apply bg-white text-brand-blue duration-500;
-		}
-	}
+	@apply border uppercase text-center px-10 py-2 inline-block uppercase whitespace-no-wrap text-xl duration-300;
 
 	&.btn-primary {
-		@apply text-white bg-brand-blue uppercase whitespace-no-wrap text-xl duration-500;
+		@apply text-white bg-brand-blue;
 
-		&:disabled {
-			@apply bg-gray-400;
+		&.btn-transparent {
+			@apply .bg-transparent;
 		}
 
-		&:not(disabled) &:hover {
-			@apply bg-white text-brand-blue duration-500;
+		&:disabled {
+			@apply bg-gray-400 cursor-default;
+		}
+
+		&.btn-green {
+			&:not(:disabled) {
+				@apply bg-green-500;
+
+				&:hover {
+					@apply bg-white text-brand-blue;
+				}
+			}
+		}
+
+		&.btn-light {
+			&:not(:disabled) {
+				@apply text-brand-blue bg-white;
+				&:hover {
+					@apply bg-gray-200;
+				}
+			}
+		}
+
+		&:not(:disabled) {
+			&:hover {
+				@apply bg-white text-brand-blue;
+			}
 		}
 	}
 
 	&.btn-small {
-		@apply text-white bg-brand-blue uppercase whitespace-no-wrap text-xl duration-500 px-2;
+		@apply text-white bg-brand-blue px-2;
 		&:hover {
-			@apply bg-white text-brand-blue duration-500;
+			@apply bg-white text-brand-blue;
 		}
 	}
 
 	&.toggled {
-		@apply bg-white text-brand-blue uppercase whitespace-no-wrap text-xl duration-500;
+		@apply bg-white text-brand-blue;
 	}
 }
 
@@ -64,6 +82,10 @@
 	&:hover {
 		@apply text-white;
 	}
+}
+
+.checkout-data {
+	@apply text-brand-bluedark;
 }
 
 main {

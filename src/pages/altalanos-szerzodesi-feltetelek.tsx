@@ -6,7 +6,7 @@ const TermsAndConditionsPage = () => (
 	<Layout>
 		<SEO title="Felhasználási feltételek" />
 		<div className="container text-brand-grayt p-4">
-			<h1 className="text-3xl uppercase mb-8">Felhasználási feltételek</h1>
+			<h1 className="text-3xl uppercase mb-8">Általános szerződési feltételek</h1>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
 				dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip

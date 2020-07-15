@@ -71,7 +71,9 @@ function SEO({
 					content: metaDescription,
 				},
 			].concat(meta)}
-		/>
+		>
+			<script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.4.3/webcomponents-loader.js"></script>
+		</Helmet>
 	);
 }
 

@@ -74,8 +74,8 @@ const Footer = () => {
 							Adatvédelmi tájékoztató
 						</Link>{" "}
 						|{" "}
-						<Link className="hover:text-brand-blue" to="/felhasznalasi-feltetelek">
-							Felhasználási feltételek
+						<Link className="hover:text-brand-blue" to="/altalanos-szerzodesi-feltetelek">
+							Általános szerződési feltételek
 						</Link>
 					</div>
 				</div>

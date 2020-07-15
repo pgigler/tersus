@@ -64,9 +64,9 @@ const ProductCarousel = ({ count }: { count: number }) => {
 
 	useEffect(() => {
 		if (transitionState === "start") {
-			globalThis.setTimeout(() => {
+			window.setTimeout(() => {
 				setTransitionState("animating");
-				globalThis.setTimeout(() => {
+				window.setTimeout(() => {
 					setTransitionState("none");
 				}, transitionDuration);
 			}, 20);

@@ -1,5 +1,7 @@
 import React, { useReducer, createContext, Dispatch } from "react";
 import { CartManager } from "../util/CartManager";
+import { isBrowser } from "../util/helper";
+import { useEffect } from "../util/customhooks";
 
 interface GlobalState {
 	numberOfItems: number;
@@ -30,8 +32,15 @@ function reducer(state: GlobalState, action: GlobalAction) {
 }
 
 const GlobalContextProvider = ({ children }) => {
+	useEffect(() => {
+		dispatch({
+			type: "SET_CART_ITEM_NUM",
+			num: new CartManager(window.localStorage).getShoppingCart().sum(),
+		});
+	}, []);
+
 	const [state, dispatch] = useReducer(reducer, {
-		numberOfItems: new CartManager(window.localStorage).getShoppingCart().items.length,
+		numberOfItems: 0,
 	});
 	return (
 		<GlobalStateContext.Provider value={state}>

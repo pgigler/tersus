@@ -22,8 +22,8 @@ export class ShoppingCart {
 		const filteredItems = this.items.filter((item) => item.id === itemId);
 		if (filteredItems.length > 0) {
 			const itemToChange = filteredItems[0];
-			if (quantity < 0) {
-				itemToChange.quantity = 0;
+			if (quantity < 1) {
+				itemToChange.quantity = 1;
 			} else if (quantity > 10) {
 				itemToChange.quantity = 10;
 			} else {
@@ -36,16 +36,24 @@ export class ShoppingCart {
 	}
 
 	public addProduct(product: Product, quantity: number) {
-		const filteredItems = this.items.filter((item) => item.id === product.id);
-		if (filteredItems.length > 0) {
-			filteredItems[0].quantity += quantity;
-		} else {
-			this.items.push(new ShoppingCartItem(product, quantity));
+		if (quantity > 0) {
+			const filteredItems = this.items.filter((item) => item.id === product.id);
+			if (filteredItems.length > 0) {
+				filteredItems[0].quantity += Math.min(10 - filteredItems[0].quantity, quantity);
+			} else {
+				this.items.push(new ShoppingCartItem(product, Math.min(quantity, 10)));
+			}
+			this.lastUpdated = new Date().getTime();
 		}
-		this.lastUpdated = new Date().getTime();
 	}
 
 	public sum() {
+		return this.items.reduce((aggr, curr) => {
+			return aggr + curr.quantity;
+		}, 0);
+	}
+
+	public priceSum() {
 		return this.items.reduce((aggr, curr) => {
 			return aggr + curr.quantity * parseFloat(curr.price);
 		}, 0);

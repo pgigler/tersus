@@ -1,5 +1,12 @@
 import { useEffect, useState, component } from "haunted";
-import { CheckoutMode, CheckoutChangeEvent } from "../pages/kosar";
+import {
+	CheckoutMode,
+	CheckoutChangeEvent,
+	ActionFinishedEvent,
+	ActionType,
+	ActionFinishedEventDetail,
+	CheckoutChangeEventDetail,
+} from "../pages/megrendeles";
 
 import { html } from "lit-html";
 import { HauntedFunc } from "../util/customhooks";
@@ -13,11 +20,13 @@ const name = "te-payment-modes";
 const DEFAULTS: Properties = {
 	mode: "HIDDEN",
 	checkoutData: new CheckoutData(),
+	actionTriggered: "none",
 };
 
 interface Properties {
 	mode: CheckoutMode;
 	checkoutData: CheckoutData;
+	actionTriggered: ActionType;
 }
 
 export type PaymentMode = "cash" | "bank_transfer" | "card" | "none";
@@ -33,24 +42,46 @@ const Component: HauntedFunc<Properties> = (host) => {
 	const props: Properties = {
 		mode: host.mode !== undefined ? host.mode : DEFAULTS.mode,
 		checkoutData: host.checkoutData !== undefined ? host.checkoutData : DEFAULTS.checkoutData,
+		actionTriggered: host.actionTriggered !== undefined ? host.actionTriggered : DEFAULTS.actionTriggered,
 	};
 
 	const [checkoutData, setCheckoutData] = useState<CheckoutData>(props.checkoutData);
+	const [validationMessage, setValidationMessage] = useState<string>("");
 
 	useEffect(() => {
 		setCheckoutData(props.checkoutData);
 	}, [props.checkoutData]);
 
+	useEffect(() => {
+		if (props.actionTriggered === "validate_and_next") {
+			const validationResult = validateAllField();
+			host.dispatchEvent(
+				new CustomEvent<ActionFinishedEventDetail>("actionFinished", { detail: { validationResult } })
+			);
+		}
+	}, [props.actionTriggered]);
+
 	const handleChange = (e: DC.Radio.ChangeEvent) => {
 		const paymentMode = e.detail.itemId as PaymentMode;
-		CheckoutData.setPaymentMode(checkoutData, paymentMode);
-		host.dispatchEvent(new CheckoutChangeEvent({ checkoutData }));
+		checkoutData.paymentMode = paymentMode;
+		host.dispatchEvent(
+			new CustomEvent<CheckoutChangeEventDetail>("change", { detail: { checkoutData } })
+		);
 	};
 
 	// TEMPLATE
 
 	const header = () => {
 		return html`<h1 class="text-2xl leading-tight font-semibold">Fizetési mód</h1>`;
+	};
+
+	const validateAllField = () => {
+		setValidationMessage("");
+		if (checkoutData.paymentMode === "none") {
+			setValidationMessage("Fizetési mód kiválasztása kötelező");
+		} else {
+			return true;
+		}
 	};
 
 	const normalTemplate = () => {
@@ -87,6 +118,7 @@ const Component: HauntedFunc<Properties> = (host) => {
 				</div>`}
 					></dc-radio>
 				</div> -->
+				<div class="text-red-500 pt-4">${validationMessage}</div>
 			</div>
 		</div> `;
 	};
@@ -95,7 +127,7 @@ const Component: HauntedFunc<Properties> = (host) => {
 		return html`<div>
 			${header()}
 			<div class="p-2 border bg-gray-100">
-				${PAYMENT_MODES[checkoutData.paymentMode]}
+				<span class="checkout-data">${PAYMENT_MODES[checkoutData.paymentMode]}</span>
 			</div>
 		</div> `;
 	};
@@ -109,7 +141,7 @@ const Component: HauntedFunc<Properties> = (host) => {
 	}
 };
 
-if (customElements.get(name) === undefined) {
+if (isBrowser() && customElements.get(name) === undefined) {
 	customElements.define(
 		name,
 		component<HTMLElement & Properties>(Component, {
@@ -124,6 +156,7 @@ if (customElements.get(name) === undefined) {
 import React from "react";
 import useCustomElement from "../util/useCustomElement";
 import { CheckoutData } from "../models/v1/CheckoutData";
+import { isBrowser } from "../util/helper";
 
 const PaymentModes = (props) => {
 	const [ref] = useCustomElement(props);
