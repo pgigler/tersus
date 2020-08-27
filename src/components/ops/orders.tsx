@@ -1,5 +1,5 @@
 import React from "react";
-import { useClient, useEffect } from "../../util/customhooks";
+import { useApiClient, useEffect } from "../../util/customhooks";
 
 const Orders = () => {
 	return (

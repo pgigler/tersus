@@ -20,7 +20,7 @@ export function useWindowSize() {
 	return size;
 }
 
-export function useClient() {
+export function useApiClient() {
 	const [client] = useState<ApiClient>(
 		(() => {
 			const apiClient = new ApiClient();

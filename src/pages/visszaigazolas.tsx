@@ -1,8 +1,11 @@
 import React from "react";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
+import { getQueryParam } from "../util/helper";
 
 const ConfirmationPage = () => {
+	const orderId = getQueryParam("orderId", "-");
+
 	return (
 		<Layout>
 			<SEO title="Visszaigazolás" />
@@ -13,8 +16,8 @@ const ConfirmationPage = () => {
 							Sikeres megrendelés
 						</h1>
 						<div className="py-2">
-							<span className="text-xl">Megrendelési szám: </span>
-							<span className="font-bold text-2xl whitespace-no-wrap">200707-123412344</span>
+							<span className="text-xl">Rendelési szám: </span>
+							<span className="font-bold text-2xl whitespace-no-wrap">{orderId}</span>
 						</div>
 						<div>
 							<h2 className="pt-8 text-xl">Kedves megrendelő!</h2>

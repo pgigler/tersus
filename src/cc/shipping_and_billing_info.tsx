@@ -370,45 +370,47 @@ const Component: HauntedFunc<Properties> = (host) => {
 				<div>Email: <span class="checkout-data">${checkoutData.email}</span></div>
 				<div>
 					Telefonszám:
-					<span class="checkout-data">+${checkoutData.phone.countryPrefix} ${checkoutData.phone.number}</span>
+					<span class="checkout-data"
+						>+${checkoutData.phone?.countryPrefix} ${checkoutData.phone?.number}</span
+					>
 				</div>
 				<div class="mt-4 mb-2 text-xl font-semibold">Szállítási cím</div>
 				${checkoutData.transportMode === "personal_collection"
 					? html`<div><span class="checkout-data">Személyes átvétel</span></div>`
 					: html`<div>
-							<div><span class="checkout-data">${checkoutData.shippingAddress.name}</span></div>
+							<div><span class="checkout-data">${checkoutData.shippingAddress?.name}</span></div>
 							<div>
 								<span class="checkout-data"
-									>${checkoutData.shippingAddress.city}, ${checkoutData.shippingAddress.street}</span
+									>${checkoutData.shippingAddress.city}, ${checkoutData.shippingAddress?.street}</span
 								>
 							</div>
-							<div><span class="checkout-data">${checkoutData.shippingAddress.zip}</span></div>
-							${!isEmpty(checkoutData.shippingAddress.remark)
+							<div><span class="checkout-data">${checkoutData.shippingAddress?.zip}</span></div>
+							${!isEmpty(checkoutData.shippingAddress?.remark)
 								? html`<div class="pt-2">
 										Megjegyzés a szállítónak:
-										<span class="checkout-data">${checkoutData.shippingAddress.remark}</span>
+										<span class="checkout-data">${checkoutData.shippingAddress?.remark}</span>
 								  </div>`
 								: ""}
 					  </div>`}
 
 				<div class="mt-4 mb-2 text-xl font-semibold">Számlázási adatok</div>
-				${checkoutData.billingAddress.isCompany
+				${checkoutData.billingAddress?.isCompany
 					? html`<div>
-								Cégnév: <span class="checkout-data">${checkoutData.billingAddress.companyName}</span>
+								Cégnév: <span class="checkout-data">${checkoutData.billingAddress?.companyName}</span>
 							</div>
 							<div>
-								Adószám: <span class="checkout-data">${checkoutData.billingAddress.taxNumber}</span>
+								Adószám: <span class="checkout-data">${checkoutData.billingAddress?.taxNumber}</span>
 							</div>`
 					: html`<div>
-							<span class="checkout-data">${checkoutData.billingAddress.personalName}</span>
+							<span class="checkout-data">${checkoutData.billingAddress?.personalName}</span>
 					  </div>`}
 
 				<div>
 					<span class="checkout-data"
-						>${checkoutData.billingAddress.city}, ${checkoutData.billingAddress.street}</span
+						>${checkoutData.billingAddress?.city}, ${checkoutData.billingAddress?.street}</span
 					>
 				</div>
-				<div><span class="checkout-data">${checkoutData.billingAddress.zip}</span></div>
+				<div><span class="checkout-data">${checkoutData.billingAddress?.zip}</span></div>
 			</div>
 		</div> `;
 	};

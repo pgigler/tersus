@@ -10,9 +10,10 @@ import ShippingAndBillingInfo from "../cc/shipping_and_billing_info";
 import DCCheckbox from "../ui/dc-checkbox";
 import * as DC from "../ui/dc-components-typing";
 import { CartManager } from "../util/CartManager";
-import { GlobalDispatchContext, GlobalStateContext } from "../context/GlobalContextProvider";
+import { GlobalStateContext } from "../context/GlobalContextProvider";
 import { isBrowser } from "../util/helper";
 import { navigate, withPrefix } from "gatsby";
+import { useApiClient } from "../util/customhooks";
 
 export type CheckoutMode = "HIDDEN" | "OPEN" | "COLLAPSED";
 
@@ -35,13 +36,14 @@ export interface CheckoutChangeEvent {
 }
 
 const CheckoutPage = () => {
-	const globalDispatch = useContext(GlobalDispatchContext);
 	const globalState = useContext(GlobalStateContext);
 	const [checkoutData, setCheckoutData] = useState<CheckoutData>();
 	const [actionShippingAndBilling, setActionShippingAndBilling] = useState<ActionType>("none");
 	const [actionTransportModes, setActionTransportModes] = useState<ActionType>("none");
 	const [actionPaymentModes, setActionPaymentModes] = useState<ActionType>("none");
 	const [validationMessage, setValidationMessage] = useState<string>();
+	const apiClient = useApiClient();
+	const cartManager = useMemo(() => new CartManager(window.localStorage), []);
 
 	const getCheckoutMode = (elem: CheckoutState): CheckoutMode => {
 		if (checkoutData) {
@@ -85,17 +87,27 @@ const CheckoutPage = () => {
 							} else {
 								setValidationMessage("");
 
-								// TODO: send order
-								new CartManager(window.localStorage).removeShoppingCart();
-								globalDispatch({ type: "SET_CART_ITEM_NUM", num: 0 });
+								try {
+									const result = await apiClient.post("/api/orders/add.php", {
+										checkoutData,
+										shoppingCart: cartManager.getShoppingCart(),
+									});
 
-								// reset state
-								setCheckoutData({
-									...checkoutData,
-									checkoutState: "TRANSPORT_MODES",
-								});
+									const orderId = result.resp.orderId;
 
-								await navigate(`/visszaigazolas`);
+									// new CartManager(window.localStorage).removeShoppingCart();
+									// globalDispatch({ type: "SET_CART_ITEM_NUM", num: 0 });
+
+									// // reset state
+									// setCheckoutData({
+									// 	...checkoutData,
+									// 	checkoutState: "TRANSPORT_MODES",
+									// });
+
+									await navigate(`/visszaigazolas?orderId=${orderId}`);
+								} catch (error) {
+									setValidationMessage("Hiba történt a mentés során");
+								}
 							}
 						}
 					}}

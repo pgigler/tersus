@@ -78,10 +78,22 @@ export const isEmpty = (text: string | undefined) => {
 	return text === undefined || text.trim().length === 0;
 };
 
+export const getQueryParam = (paramName: string, defaultValue?: string): string | undefined => {
+	if (isBrowser()) {
+		const list = getSearchParamList(window.location.search);
+		const filteredList = list.filter((item) => item[0] === paramName);
+		if (filteredList.length > 0) {
+			return filteredList[0][1];
+		}
+	}
+
+	return defaultValue;
+};
+
 export const hasQueryParam = (paramName: string) => {
 	if (isBrowser()) {
 		const list = getSearchParamList(window.location.search);
-		return list.some((item) => item[0] === "paramName");
+		return list.some((item) => item[0] === paramName);
 	}
 
 	return false;

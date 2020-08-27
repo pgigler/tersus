@@ -1,25 +1,36 @@
 <?php declare(strict_types=1);
 
-namespace Tersus\Auth;
-require_once '../tersus_config.php';
-require './../vendor/autoload.php';
+namespace Tersus\Helpers;
+
+require_once __DIR__ . '/../tersus_config.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use Google\Auth\AccessToken;
 
-function authenticate()
+function getTablePrefix($name)
+{
+	$isUAT = ENV == "uat";
+	return $isUAT ? "uat_" : "prod_";
+}
+
+function handleCORS()
 {
 	$isUAT = ENV == "uat";
 
-	header("Access-Control-Allow-Headers: Authorization, X-Authorization");
+	header("Access-Control-Allow-Headers: Authorization, X-Authorization, Content-Type");
 	if ($isUAT) {
 		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Methods: *");
 	}
 
 	if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 		header('HTTP/1.1 200 OK');
 		exit();
 	}
+}
 
+function authenticate()
+{
 	try {
 		$headers = getAuthorizationHeader();
 		$idToken = null;

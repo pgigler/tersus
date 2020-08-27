@@ -32,7 +32,7 @@ CREATE TABLE uat_products(
 CREATE TABLE uat_customers(
     email VARCHAR(250) NOT NULL,
     partner_code VARCHAR(20) NOT NULL,
-    newsletter CHAR(1) NOT NULL, -- T, F
+    newsletter CHAR(1) NOT NULL, -- Y, N
     company_name VARCHAR(250) NOT NULL,
     first_name VARCHAR(100) NOT NULL,
     last_ame VARCHAR(100) NOT NULL,
@@ -52,22 +52,36 @@ CREATE TABLE uat_customers(
 
 CREATE TABLE uat_orders(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    order_id VARCHAR(20),
     partner_code VARCHAR(20),
     customer_email VARCHAR(250),
     order_status CHAR(15) NOT NULL, -- OPEN, ARCHIVED, CANCELED
     shipment_status CHAR(15) NOT NULL, -- PENDING, SHIPPED, PART_SHIPPED
     payment_status CHAR(15) NOT NULL, -- PENDING, AUTHORIZED, PAID, VOIDED, REFUNDED, UNPAID, PART_PAID, PART_REFUND
-    cod CHAR(1) NOT NULL, -- T, F
+    payment_mode CHAR(15) NOT NULL, -- COD_CASH, COD_CARD, BANK_TRANSFER, CARD
     chargeback_status CHAR(15) NOT NULL, -- EMTPY, OPEN, SUBMITTED, WON, LOST
-    delivery_method CHAR(15), -- DIRECT, GLS, ...
+    delivery_mode CHAR(15), -- PERS_COLL, HOME, GLS, ...
     delivery_price DECIMAL(15,2) NOT NULL,
     delivery_currency VARCHAR(10) NOT NULL,
-    note VARCHAR(1000),
+    billing_name VARCHAR(100) NOT NULL,
+    billing_city VARCHAR(100) NOT NULL,
+    billing_street VARCHAR(100) NOT NULL,
+    billing_zip VARCHAR(5) NOT NULL,
+    billing_is_company VARCHAR(1) NOT NULL, -- Y, N
+    billing_tax_number VARCHAR(15),
+    shipping_name VARCHAR(100) NOT NULL,
+    shipping_city VARCHAR(100) NOT NULL,
+    shipping_street VARCHAR(100) NOT NULL,
+    shipping_zip VARCHAR(5) NOT NULL,
+    shipping_remark VARCHAR(200),
     created_date DATETIME NOT NULL,
     creator VARCHAR(100) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    phone_country VARCHAR(5) NOT NULL,
     updated_date DATETIME,
     updater VARCHAR(100),
     INDEX partner_customer_ind (partner_code, customer_email),
+    UNIQUE KEY `u_order_id` (order_id)
     FOREIGN KEY (partner_code, customer_email)
         REFERENCES uat_customers(partner_code, email)
         ON DELETE CASCADE

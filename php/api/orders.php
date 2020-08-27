@@ -1,25 +1,30 @@
 <?php declare(strict_types=1);
-require_once '../tersus_config.php';
+http_response_code(500);
 
-$tablePrefix = ENV == "uat" ? "uat_" : "prod_";
+require_once '../tersus_config.php';
+require_once 'helpers.php';
+
+\Tersus\Helpers\handleCORS();
+$email = \Tersus\Helpers\authenticate();
+$tablePrefix = \Tersus\Helpers\getTablePrefix();
 
 header('Content-Type: application/json; charset=utf-8');
 
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
-$sql = "SELECT * FROM`${tablePrefix}orders` WHERE 1";
-$result = $conn->query($sql);
-$arr = [];
-
-if ($result->num_rows > 0) {
-	while ($row = $result->fetch_assoc()) {
-		array_push($arr, $row);
-	}
-	echo json_encode($arr, JSON_UNESCAPED_UNICODE);
-} else {
-	echo "[]";
+try {
+	$dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
+	$pdo = new PDO($dsn, DB_USER, DB_PASS);
+} catch (\PDOException $e) {
+	throw new \PDOException($e->getMessage(), (int) $e->getCode());
 }
 
-$conn->close();
+$stmt = $pdo->query("SELECT * FROM `${tablePrefix}orders` WHERE 1");
+$arr = [];
+while ($row = $stmt->fetch()) {
+	array_push($arr, $row);
+}
+
+echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+
+header('HTTP/1.1 200 OK');
 
 ?>

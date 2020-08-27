@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useClient, useEffect } from "../../util/customhooks";
+import { useApiClient, useEffect } from "../../util/customhooks";
 import { NotificationContainer, NotificationManager } from "react-notifications";
 import { withErrorHandling } from "../../util/helper";
 import ReactLoading from "react-loading";
@@ -13,14 +13,14 @@ interface Product {
 const Products = () => {
 	const [loading, setLoading] = useState(false);
 	const [products, setProducts] = useState<Product[]>([]);
-	const client = useClient();
+	const apiClient = useApiClient();
 
 	useEffect(async () => {
 		withErrorHandling(
 			async () => {
 				setLoading(true);
-				const result = await client.fetch("/api/products.php");
-				setProducts(result);
+				const result = await apiClient.get("/api/products.php");
+				setProducts(result.resp);
 				setLoading(false);
 			},
 			(error: Error) => {

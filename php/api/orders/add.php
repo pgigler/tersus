@@ -1,24 +1,41 @@
 <?php declare(strict_types=1);
+http_response_code(500);
 
 require_once '../../tersus_config.php';
+require '../helpers.php';
 
-$conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$isUAT = ENV == "uat";
+$tablePrefix = $isUAT ? "uat_" : "prod_";
 
-$sql = "SELECT * FROM `orders` WHERE 1";
-$result = $conn->query($sql);
+\Tersus\Helpers\handleCORS();
 
-if ($result->num_rows > 0) {
-	// $res = json_encode($result);
-	// echo $res;
-	// output data of each row
-	while ($row = $result->fetch_assoc()) {
-		echo json_encode($row);
-		// echo "id: " . $row["id"] . " - sku: " . $row["sku"] . "<br>";
-	}
-} else {
-	echo "{}";
-}
+header('Content-Type: application/json; charset=utf-8');
 
-$conn->close();
+// Takes raw data from the request
+$json = file_get_contents('php://input');
+
+$data = json_decode($json);
+
+$result = new class {};
+$dec = join(
+	"",
+	array_map(function ($char) {
+		return hexdec($char);
+	}, str_split(md5($json)))
+);
+$num1 = substr($dec, 0, 5);
+$num2 = substr($dec, 5, 4);
+$result->orderId = (new DateTime())->format("ymd") . "-" . $num1 . "-" . $num2;
+
+echo json_encode($result, JSON_UNESCAPED_UNICODE);
+
+// try {
+// 	$dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
+// 	$pdo = new PDO($dsn, DB_USER, DB_PASS);
+// } catch (\PDOException $e) {
+// 	throw new \PDOException($e->getMessage(), (int) $e->getCode());
+// }
+
+header('HTTP/1.1 200 OK');
 
 ?>

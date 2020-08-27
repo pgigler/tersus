@@ -80,16 +80,16 @@ export class CheckoutData {
 		if (field === "shippingName") {
 			if (value === undefined || value.length === 0) {
 				return "Kötelező mező";
-			} else if (value.length > 200) {
-				return "Maximum 200 karakter";
+			} else if (value.length > 100) {
+				return "Maximum 100 karakter";
 			} else {
 				return undefined;
 			}
 		} else if (field === "shippingStreet") {
 			if (value === undefined || value.length === 0) {
 				return "Kötelező mező";
-			} else if (value.length > 200) {
-				return "Maximum 200 karakter";
+			} else if (value.length > 100) {
+				return "Maximum 100 karakter";
 			} else {
 				return undefined;
 			}
@@ -106,30 +106,30 @@ export class CheckoutData {
 		} else if (field === "shippingCity") {
 			if (value === undefined || value.length === 0) {
 				return "Kötelező mező";
-			} else if (value.length > 200) {
-				return "Maximum 200 karakter";
+			} else if (value.length > 100) {
+				return "Maximum 100 karakter";
 			} else {
 				return undefined;
 			}
 		} else if (field === "shippingRemark") {
-			if (value !== undefined && value.length > 200) {
-				return "Maximum 200 karakter";
+			if (value !== undefined && value.length > 100) {
+				return "Maximum 100 karakter";
 			} else {
 				return undefined;
 			}
 		} else if (field === "billingPersonalName") {
 			if (value === undefined || value.length === 0) {
 				return "Kötelező mező";
-			} else if (value.length > 200) {
-				return "Maximum 200 karakter";
+			} else if (value.length > 100) {
+				return "Maximum 100 karakter";
 			} else {
 				return undefined;
 			}
 		} else if (field === "billingCompanyName") {
 			if (value === undefined || value.length === 0) {
 				return "Kötelező mező";
-			} else if (value.length > 200) {
-				return "Maximum 200 karakter";
+			} else if (value.length > 100) {
+				return "Maximum 100 karakter";
 			} else {
 				return undefined;
 			}
@@ -144,8 +144,8 @@ export class CheckoutData {
 		} else if (field === "billingStreet") {
 			if (value === undefined || value.length === 0) {
 				return "Kötelező mező";
-			} else if (value.length > 200) {
-				return "Maximum 200 karakter";
+			} else if (value.length > 100) {
+				return "Maximum 100 karakter";
 			} else {
 				return undefined;
 			}
@@ -162,14 +162,16 @@ export class CheckoutData {
 		} else if (field === "billingCity") {
 			if (value === undefined || value.length === 0) {
 				return "Kötelező mező";
-			} else if (value.length > 200) {
-				return "Maximum 200 karakter";
+			} else if (value.length > 100) {
+				return "Maximum 100 karakter";
 			} else {
 				return undefined;
 			}
 		} else if (field === "email") {
 			if (value === undefined || value.length === 0) {
 				return "Kötelező mező";
+			} else if (value.length > 200) {
+				return "Maximum 200 karakter";
 			} else if (!validateEmail(value)) {
 				return "Email formátum hibás";
 			} else {
