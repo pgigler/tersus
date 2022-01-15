@@ -61,7 +61,7 @@
     "git-pull-or-clone": "^2.0.1",
     "mkdirp": "^1.0.4",
     "netlify-cms-app": "^2.12.15",
-    "node-forge": "^0.9.1",
+    "node-forge": "^1.0.0",
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
     "remark-image-attributes": "^0.1.3",
